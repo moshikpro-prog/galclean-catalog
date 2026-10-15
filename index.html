@@ -227,13 +227,17 @@ body{width:430px!important;margin:0 auto!important;box-shadow:0 0 60px rgba(0,0,
 .ytrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
 .yt{position:relative;aspect-ratio:9/16;border-radius:16px;overflow:hidden;border:1px solid rgba(94,196,255,.3);background:#000;box-shadow:0 10px 24px rgba(0,0,0,.5)}
 .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+.vbox video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
+.snd{position:absolute;left:8px;bottom:8px;z-index:3;display:flex;align-items:center;gap:6px;padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(10,12,16,.72);color:#fff;font:600 13px Heebo,sans-serif;cursor:pointer;backdrop-filter:blur(6px)}
+.snd svg{width:18px;height:18px}.snd .on{display:none}.snd.unmuted .on{display:inline-flex}.snd.unmuted .off{display:none}.snd.unmuted em{display:none}.snd em{font-style:normal}
 </style></head><body>
 <section id="p0" class="page cover">
   <header class="top">
     <div class="brand"><span class="wm">Gal<b>CLEAN</b></span><span class="wm-s">WINDOW CLEANING SOLUTION</span></div>
     <span class="tag">ערכות לבית ולעסק</span>
   </header>
-  <h2 class="cv-h">מהיום כל אחד מנקה חלונות <em>כמו מקצוען</em></h2><div class="ytrow"><div class="yt"><iframe src="https://www.youtube.com/embed/XoUpxtDleBA?autoplay=1&mute=1&loop=1&playlist=XoUpxtDleBA&playsinline=1&rel=0&cc_load_policy=0&iv_load_policy=3" title="GalClean" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="eager"></iframe></div><div class="yt"><iframe src="https://www.youtube.com/embed/Ll4vgSTiU6k?playsinline=1&rel=0&cc_load_policy=0&iv_load_policy=3" title="GalClean" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="eager"></iframe></div></div>
+  <h2 class="cv-h">מהיום כל אחד מנקה חלונות <em>כמו מקצוען</em></h2><div class="ytrow"><div class="yt vbox"><video id="vR" src="media/explain.mp4" poster="media/explain.jpg" autoplay loop playsinline preload="auto"></video><button type="button" id="snd" class="snd" aria-label="הפעלת קול"><span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></span><span class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M22 9l-6 6M16 9l6 6"/></svg></span><em>הפעל קול</em></button></div><div class="yt vbox"><video id="vL" src="media/demo.mp4" poster="media/demo.jpg" controls playsinline preload="metadata"></video></div></div>
   <p class="cv-p">מי ברז מכילים מינרלים. כשהמים מתייבשים על הזכוכית המינרלים נשארים, ואלה הסימנים והכתמים הלבנים שאתם רואים גם אחרי שניקיתם את החלון. מכשירי האוסמוזה ההפוכה שלנו, יחידים מסוגם בישראל לשימוש פרטי, מזקקים את מי הברז עד 0 מינרלים, ומים מזוקקים מתייבשים מעצמם בלי להשאיר סימן. כך מנקים <b class="hl3">בלי סבון, בלי ניגוב ובלי ייבוש</b>, ועם מוט מהקרקע מגיעים בלי סולם לחלונות, קירות מסך, מעקות זכוכית, תריסים, רפפות וצלונים.</p>
   <div class="cv-lbl"><b>איזה מכשיר מתאים לכם?</b><i></i></div>
   
@@ -824,4 +828,15 @@ body{width:430px!important;margin:0 auto!important;box-shadow:0 0 60px rgba(0,0,
   <path d="M16 11V3"/><rect x="14.5" y="7.5" width="3" height="3.5" rx=".6"/></svg></span><div class="add-t">מברשת סיבים</div><div class="add-p"><span class="cur">₪</span>425</div></div></div><div class="back" data-goto="0">↑ חזרה לתחילת המסמך</div><div class="end"></div>
 </section><script>
 document.querySelectorAll('[data-goto]').forEach(function(e){e.addEventListener('click',function(){var t=document.getElementById('p'+e.getAttribute('data-goto'));if(t)t.scrollIntoView({behavior:'smooth'});});});
+</script><script>
+(function(){var r=document.getElementById('vR'),l=document.getElementById('vL'),b=document.getElementById('snd');if(!r)return;
+function ui(){b.classList.toggle('unmuted',!r.muted);}
+function tryPlay(){r.muted=false;var p=r.play();if(p&&p.catch){p.then(ui).catch(function(){r.muted=true;r.play().catch(function(){});ui();});}ui();}
+tryPlay();
+b.addEventListener('click',function(e){e.stopPropagation();r.muted=!r.muted;if(r.paused)r.play();ui();});
+r.addEventListener('click',function(){if(r.paused){r.play();}else{r.pause();}});
+function firstTouch(e){if(e.target===b||e.target===l)return;if(r.muted&&!r.paused&&!(l&&!l.paused)){r.muted=false;ui();}document.removeEventListener('pointerdown',firstTouch,true);}
+document.addEventListener('pointerdown',firstTouch,true);
+if(l){l.addEventListener('play',function(){r.muted=true;ui();});}
+})();
 </script></body></html>
