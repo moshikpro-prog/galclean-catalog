@@ -231,13 +231,26 @@ body{width:430px!important;margin:0 auto!important;box-shadow:0 0 60px rgba(0,0,
 .vbox video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
 .snd{position:absolute;left:8px;bottom:8px;z-index:3;display:flex;align-items:center;gap:6px;padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(10,12,16,.72);color:#fff;font:600 13px Heebo,sans-serif;cursor:pointer;backdrop-filter:blur(6px)}
 .snd svg{width:18px;height:18px}.snd .on{display:none}.snd.unmuted .on{display:inline-flex}.snd.unmuted .off{display:none}.snd.unmuted em{display:none}.snd em{font-style:normal}
+
+.snd{left:50%!important;bottom:auto!important;top:12px;transform:translateX(-50%);padding:9px 14px 9px 12px!important;gap:8px!important;
+ background:rgba(8,12,18,.55)!important;border:1px solid rgba(94,196,255,.55)!important;font-size:13.5px!important;white-space:nowrap;
+ box-shadow:0 6px 18px rgba(0,0,0,.45);transition:opacity .35s ease,transform .35s ease}
+.snd:before{content:"";position:absolute;inset:-1px;border-radius:inherit;border:1px solid rgba(94,196,255,.7);animation:sndpulse 2.2s ease-out infinite;pointer-events:none}
+.snd .eq{display:inline-flex;align-items:flex-end;gap:2px;height:14px}
+.snd .eq b{display:block;width:3px;border-radius:2px;background:#5ec4ff;height:4px;animation:eq 1s ease-in-out infinite}
+.snd .eq b:nth-child(2){animation-delay:.18s}.snd .eq b:nth-child(3){animation-delay:.36s}
+.snd.unmuted{opacity:.0;pointer-events:none;transform:translateX(-50%) translateY(6px)}
+.snd.unmuted:before{animation:none}
+@keyframes sndpulse{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.25,1.6);opacity:0}}
+@keyframes eq{0%,100%{height:4px}50%{height:14px}}
+@media (prefers-reduced-motion:reduce){.snd:before,.snd .eq b{animation:none}.snd .eq b{height:9px}}
 </style></head><body>
 <section id="p0" class="page cover">
   <header class="top">
     <div class="brand"><span class="wm">Gal<b>CLEAN</b></span><span class="wm-s">WINDOW CLEANING SOLUTION</span></div>
     <span class="tag">ערכות מקצועיות</span>
   </header>
-  <h2 class="cv-h">המכשיר של המקצוענים <em>לניקיון חלונות מהיר</em></h2><div class="ytrow"><div class="yt vbox"><video id="vR" src="media/explain.mp4" poster="media/explain.jpg" autoplay loop playsinline preload="auto"></video><button type="button" id="snd" class="snd" aria-label="הפעלת קול"><span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></span><span class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M22 9l-6 6M16 9l6 6"/></svg></span><em>הפעל קול</em></button></div><div class="yt vbox"><video id="vL" src="media/demo.mp4" poster="media/demo.jpg" controls playsinline preload="metadata"></video></div></div>
+  <h2 class="cv-h">המכשיר של המקצוענים <em>לניקיון חלונות מהיר</em></h2><div class="ytrow"><div class="yt vbox"><video id="vR" src="media/explain.mp4" poster="media/explain.jpg" autoplay loop playsinline preload="auto"></video><button type="button" id="snd" class="snd" aria-label="הפעלת קול"><span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></span><span class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M22 9l-6 6M16 9l6 6"/></svg></span><i class="eq"><b></b><b></b><b></b></i><em>הקישו להפעלת קול</em></button></div><div class="yt vbox"><video id="vL" src="media/demo.mp4" poster="media/demo.jpg" controls playsinline preload="metadata"></video></div></div>
   <p class="cv-p">פתרון מקצועי בשיטת אוסמוזה הפוכה לניקוי חלונות, מעקות זכוכית וקירות מסך. המכשיר מזקק את מי הברז עד 0 מינרלים, והמים מתייבשים מעצמם בלי להשאיר כתמים לבנים: עובדים <b class="hl3">בלי סבון, בלי ניגוב ובלי ייבוש</b>. עם מוט מהקרקע מנקים במהירות שורות ארוכות של חלונות בגובה הרחוב, מגיעים למקומות שהגישה אליהם מאתגרת, ועד גובה 20 מ'. עוצמה, יעילות וחיסכון בזמן עבודה, לעסקים, פרויקטים גדולים ותעשייה.</p>
   <div class="cv-lbl"><b>איזה מכשיר מתאים לכם?</b><i></i></div>
   
@@ -835,8 +848,8 @@ function tryPlay(){r.muted=false;var p=r.play();if(p&&p.catch){p.then(ui).catch(
 tryPlay();
 b.addEventListener('click',function(e){e.stopPropagation();r.muted=!r.muted;if(r.paused)r.play();ui();});
 r.addEventListener('click',function(){if(r.paused){r.play();}else{r.pause();}});
-function firstTouch(e){if(e.target===b||e.target===l)return;if(r.muted&&!r.paused&&!(l&&!l.paused)){r.muted=false;ui();}document.removeEventListener('pointerdown',firstTouch,true);}
-document.addEventListener('pointerdown',firstTouch,true);
+function firstTouch(e){if(e.target===b||e.target===l)return;if(r.muted&&!r.paused&&!(l&&!l.paused)){r.muted=false;ui();}['pointerdown','pointerup','touchend','click'].forEach(function(t){document.removeEventListener(t,firstTouch,true);});}
+['pointerdown','pointerup','touchend','click'].forEach(function(t){document.addEventListener(t,firstTouch,true);});
 if(l){l.addEventListener('play',function(){r.muted=true;ui();});}
 })();
 </script></body></html>
