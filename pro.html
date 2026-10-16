@@ -244,13 +244,35 @@ body{width:430px!important;margin:0 auto!important;box-shadow:0 0 60px rgba(0,0,
 @keyframes sndpulse{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.25,1.6);opacity:0}}
 @keyframes eq{0%,100%{height:4px}50%{height:14px}}
 @media (prefers-reduced-motion:reduce){.snd:before,.snd .eq b{animation:none}.snd .eq b{height:9px}}
+
+/* custom video controls */
+.snd{font-size:12px!important;padding:6px 10px 6px 9px!important;gap:5px!important;max-width:calc(100% - 16px)}.snd svg{width:15px;height:15px}.snd .eq{height:11px}.snd .eq b{width:2.5px}
+.snd{top:auto!important;bottom:52px!important}
+.snd.unmuted{transform:translateX(-50%) translateY(6px)}
+.vc{position:absolute;left:0;right:0;bottom:0;z-index:4;direction:ltr;display:flex;align-items:center;gap:6px;padding:22px 8px 8px;
+ background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,0));transition:opacity .3s ease}
+.vbox.hide .vc{opacity:0;pointer-events:none}
+.snd{transition:opacity .35s ease,transform .35s ease,bottom .3s ease!important}.vbox.hide .snd{bottom:14px!important}
+.vbox:after{content:"";position:absolute;left:0;bottom:0;height:3px;width:var(--pp,0%);background:#5ec4ff;z-index:3;opacity:0;transition:opacity .3s;pointer-events:none}.vbox.hide:after{opacity:.9}
+.vc button{flex:none;width:30px;height:30px;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer}
+.vc button svg{width:16px;height:16px}
+.vc .pl .pa,.vbox.playing .vc .pl .py{display:none}.vbox.playing .vc .pl .pa{display:block}
+.vc .mu .m1{display:none}.vbox.muted .vc .mu .m1{display:block}.vbox.muted .vc .mu .m0{display:none}
+.vc .tm{flex:none;font:500 10.5px Heebo,sans-serif;color:#dfe8f0;min-width:28px;text-align:center}
+.vc input{flex:1;min-width:0;height:30px;margin:0;background:transparent;-webkit-appearance:none;appearance:none;cursor:pointer;touch-action:none}
+.vc input::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,#5ec4ff var(--p,0%),rgba(255,255,255,.3) var(--p,0%))}
+.vc input::-moz-range-track{height:4px;border-radius:2px;background:linear-gradient(to right,#5ec4ff var(--p,0%),rgba(255,255,255,.3) var(--p,0%))}
+.vc input::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;margin-top:-5.5px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(94,196,255,.45)}
+.vc input::-moz-range-thumb{width:15px;height:15px;border:0;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(94,196,255,.45)}
+.bigp{position:absolute;left:50%;top:50%;z-index:3;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;border:1px solid rgba(94,196,255,.6);background:rgba(8,12,18,.6);color:#fff;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:opacity .25s}
+.bigp svg{width:24px;height:24px;margin-left:3px}.vbox.playing .bigp{opacity:0}
 </style></head><body>
 <section id="p0" class="page cover">
   <header class="top">
     <div class="brand"><span class="wm">Gal<b>CLEAN</b></span><span class="wm-s">WINDOW CLEANING SOLUTION</span></div>
     <span class="tag">ערכות מקצועיות</span>
   </header>
-  <h2 class="cv-h">המכשיר של המקצוענים <em>לניקיון חלונות מהיר</em></h2><div class="ytrow"><div class="yt vbox"><video id="vR" src="media/explain.mp4" poster="media/explain.jpg" autoplay loop playsinline preload="auto"></video><button type="button" id="snd" class="snd" aria-label="הפעלת קול"><span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></span><span class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M22 9l-6 6M16 9l6 6"/></svg></span><i class="eq"><b></b><b></b><b></b></i><em>הקישו להפעלת קול</em></button></div><div class="yt vbox"><video id="vL" src="media/demo.mp4" poster="media/demo.jpg" controls playsinline preload="metadata"></video></div></div>
+  <h2 class="cv-h">המכשיר של המקצוענים <em>לניקיון חלונות מהיר</em></h2><div class="ytrow"><div class="yt vbox"><video id="vR" src="media/explain.mp4" poster="media/explain.jpg" autoplay loop playsinline preload="auto"></video><button type="button" id="snd" class="snd" aria-label="הפעלת קול"><span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></span><span class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M22 9l-6 6M16 9l6 6"/></svg></span><i class="eq"><b></b><b></b><b></b></i><em>הקישו להפעלת קול</em></button><div class="vc"><button type="button" class="pl" aria-label="הפעלה/השהיה"><svg class="py" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg><svg class="pa" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4.5" width="4" height="15" rx="1"/><rect x="14" y="4.5" width="4" height="15" rx="1"/></svg></button><input type="range" min="0" max="1000" value="0" step="1" aria-label="מיקום בסרטון"><span class="tm">0:00</span><button type="button" class="mu" aria-label="קול"><svg class="m0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg><svg class="m1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M22 9l-6 6M16 9l6 6"/></svg></button></div></div><div class="yt vbox"><video id="vL" src="media/demo.mp4" poster="media/demo.jpg" playsinline preload="metadata"></video><div class="bigp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></div><div class="vc"><button type="button" class="pl" aria-label="הפעלה/השהיה"><svg class="py" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg><svg class="pa" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4.5" width="4" height="15" rx="1"/><rect x="14" y="4.5" width="4" height="15" rx="1"/></svg></button><input type="range" min="0" max="1000" value="0" step="1" aria-label="מיקום בסרטון"><span class="tm">0:00</span><button type="button" class="mu" aria-label="קול"><svg class="m0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg><svg class="m1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M22 9l-6 6M16 9l6 6"/></svg></button></div></div></div>
   <p class="cv-p">פתרון מקצועי בשיטת אוסמוזה הפוכה לניקוי חלונות, מעקות זכוכית וקירות מסך. המכשיר מזקק את מי הברז עד 0 מינרלים, והמים מתייבשים מעצמם בלי להשאיר כתמים לבנים: עובדים <b class="hl3">בלי סבון, בלי ניגוב ובלי ייבוש</b>. עם מוט מהקרקע מנקים במהירות שורות ארוכות של חלונות בגובה הרחוב, מגיעים למקומות שהגישה אליהם מאתגרת, ועד גובה 20 מ'. עוצמה, יעילות וחיסכון בזמן עבודה, לעסקים, פרויקטים גדולים ותעשייה.</p>
   <div class="cv-lbl"><b>איזה מכשיר מתאים לכם?</b><i></i></div>
   
@@ -842,13 +864,38 @@ body{width:430px!important;margin:0 auto!important;box-shadow:0 0 60px rgba(0,0,
 </section><script>
 document.querySelectorAll('[data-goto]').forEach(function(e){e.addEventListener('click',function(){var t=document.getElementById('p'+e.getAttribute('data-goto'));if(t)t.scrollIntoView({behavior:'smooth'});});});
 </script><script>
-(function(){var r=document.getElementById('vR'),l=document.getElementById('vL'),b=document.getElementById('snd');if(!r)return;
+(function(){
+var r=document.getElementById('vR'),l=document.getElementById('vL'),b=document.getElementById('snd');if(!r)return;
+function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+('0'+s%60).slice(-2);}
+var boxes=[];
+function setup(v){
+ var box=v.parentNode,bar=box.querySelector('.vc'),pl=bar.querySelector('.pl'),rg=bar.querySelector('input'),tm=bar.querySelector('.tm'),mu=bar.querySelector('.mu'),t=null,drag=false;
+ function st(){box.classList.toggle('playing',!v.paused);box.classList.toggle('muted',v.muted);}
+ function hideLater(){clearTimeout(t);if(!v.paused&&!drag)t=setTimeout(function(){box.classList.add('hide');},2800);}
+ function show(){box.classList.remove('hide');hideLater();}
+ function prog(){if(drag||!v.duration)return;var p=v.currentTime/v.duration*100;rg.value=Math.round(p*10);rg.style.setProperty('--p',p+'%');box.style.setProperty('--pp',p+'%');tm.textContent=fmt(v.currentTime);}
+ v.addEventListener('timeupdate',prog);v.addEventListener('loadedmetadata',prog);
+ ['play','pause','volumechange'].forEach(function(e){v.addEventListener(e,function(){st();if(e==='pause'){box.classList.remove('hide');clearTimeout(t);}else if(e==='play')hideLater();});});
+ pl.addEventListener('click',function(e){e.stopPropagation();if(v.paused)v.play();else v.pause();show();});
+ mu.addEventListener('click',function(e){e.stopPropagation();v.muted=!v.muted;if(!v.muted&&v.paused)v.play();show();if(b&&v===r)b.classList.toggle('unmuted',!r.muted);});
+ rg.addEventListener('input',function(){drag=true;clearTimeout(t);box.classList.remove('hide');if(v.duration){var p=rg.value/10;v.currentTime=v.duration*p/100;rg.style.setProperty('--p',p+'%');tm.textContent=fmt(v.currentTime);}});
+ function seekAt(x){var q=rg.getBoundingClientRect();var p=Math.min(1,Math.max(0,(x-q.left)/q.width));rg.value=Math.round(p*1000);rg.style.setProperty('--p',p*100+'%');box.style.setProperty('--pp',p*100+'%');if(v.duration){v.currentTime=v.duration*p;tm.textContent=fmt(v.currentTime);}}
+ rg.addEventListener('pointerdown',function(e){e.preventDefault();drag=true;clearTimeout(t);box.classList.remove('hide');try{rg.setPointerCapture(e.pointerId);}catch(_){}seekAt(e.clientX);});
+ rg.addEventListener('pointermove',function(e){if(drag){e.preventDefault();seekAt(e.clientX);}});
+ ['pointerup','pointercancel','lostpointercapture'].forEach(function(n){rg.addEventListener(n,function(){if(drag){drag=false;hideLater();}});});
+ rg.addEventListener('change',function(){drag=false;hideLater();});
+ bar.addEventListener('click',function(e){e.stopPropagation();});
+ v.addEventListener('click',function(){
+  if(v===r&&r.muted&&!r.paused&&b&&!b.classList.contains('unmuted')){r.muted=false;b.classList.add('unmuted');show();return;}
+  if(box.classList.contains('hide')&&!v.paused){show();return;}
+  if(v.paused)v.play();else v.pause();show();});
+ st();box._show=show;boxes.push(box);
+}
+setup(r);if(l)setup(l);
 function ui(){b.classList.toggle('unmuted',!r.muted);}
-function tryPlay(){r.muted=false;var p=r.play();if(p&&p.catch){p.then(ui).catch(function(){r.muted=true;r.play().catch(function(){});ui();});}ui();}
-tryPlay();
-b.addEventListener('click',function(e){e.stopPropagation();r.muted=!r.muted;if(r.paused)r.play();ui();});
-r.addEventListener('click',function(){if(r.paused){r.play();}else{r.pause();}});
-function firstTouch(e){if(e.target===b||e.target===l)return;if(r.muted&&!r.paused&&!(l&&!l.paused)){r.muted=false;ui();}['pointerdown','pointerup','touchend','click'].forEach(function(t){document.removeEventListener(t,firstTouch,true);});}
+r.muted=false;var p=r.play();if(p&&p.catch){p.then(ui).catch(function(){r.muted=true;r.play().catch(function(){});ui();});}ui();
+b.addEventListener('click',function(e){e.stopPropagation();r.muted=false;if(r.paused)r.play();ui();r.parentNode._show();});
+function firstTouch(e){var x=e.target;if(x===b||(b&&b.contains(x))||(x.closest&&x.closest('.vbox')))return;if(r.muted&&!r.paused&&!(l&&!l.paused)){r.muted=false;ui();}['pointerdown','pointerup','touchend','click'].forEach(function(t){document.removeEventListener(t,firstTouch,true);});}
 ['pointerdown','pointerup','touchend','click'].forEach(function(t){document.addEventListener(t,firstTouch,true);});
 if(l){l.addEventListener('play',function(){r.muted=true;ui();});}
 })();
