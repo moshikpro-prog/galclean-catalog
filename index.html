@@ -863,7 +863,10 @@ body{width:430px!important;margin:0 auto!important;box-shadow:0 0 60px rgba(0,0,
   <path d="M5.5 16.5v6M7.5 16.5v6M9.5 16.5v6M11.5 16.5v6M13.5 16.5v6M15.5 16.5v6M17.5 16.5v6M19.5 16.5v6M21.5 16.5v6M23.5 16.5v6M25.5 16.5v6" stroke-width="1.2"/>
   <path d="M16 11V3"/><rect x="14.5" y="7.5" width="3" height="3.5" rx=".6"/></svg></span><div class="add-t">מברשת סיבים</div><div class="add-p"><span class="cur">₪</span>425</div></div></div><div class="back" data-goto="0">↑ חזרה לתחילת המסמך</div><div class="end"></div>
 </section><script>
-document.querySelectorAll('[data-goto]').forEach(function(e){e.addEventListener('click',function(){var t=document.getElementById('p'+e.getAttribute('data-goto'));if(t)t.scrollIntoView({behavior:'smooth'});});});
+var _fx=document.createElement('div');_fx.style.cssText='position:fixed;inset:0;background:#05070a;opacity:0;pointer-events:none;z-index:9999;transition:opacity .16s ease';document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(_fx);});
+function jump(t){if(!_fx.parentNode)document.body.appendChild(_fx);_fx.style.opacity='1';setTimeout(function(){window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset,behavior:'instant'});requestAnimationFrame(function(){_fx.style.opacity='0';});},170);}
+</script><script>
+document.querySelectorAll('[data-goto]').forEach(function(e){e.addEventListener('click',function(){var t=document.getElementById('p'+e.getAttribute('data-goto'));if(t)jump(t);});});
 </script><script>
 (function(){
 var r=document.getElementById('vR'),l=document.getElementById('vL'),b=document.getElementById('snd');if(!r)return;
