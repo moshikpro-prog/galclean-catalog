@@ -100,6 +100,23 @@ section + section { border-top: 1px solid var(--line); }
 .explain-clip video { display: block; width: 100%; max-width: 100%; aspect-ratio: 9 / 16; object-fit: cover; background: #0A2E4C; }
 .explain-clip figcaption { padding: 10px 12px; font-weight: 700; font-size: .92rem; }
 
+/* scope: tower with 20 m band */
+.scope { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 28px; align-items: start; }
+.scope-text { min-width: 0; }
+.tower { position: sticky; top: calc(16px + env(safe-area-inset-top, 0px)); margin: 0; border-radius: 18px; overflow: hidden; box-shadow: 0 14px 30px -18px rgba(10,46,76,.55); }
+.tower img { display: block; width: 100%; height: auto; max-width: 100%; }
+.tower-dim { position: absolute; inset: 0 0 48% 0; background: linear-gradient(180deg, rgba(10,46,76,.45), rgba(10,46,76,.15)); }
+.band { position: absolute; left: 0; right: 0; bottom: 10%; height: 38%; background: rgba(91,194,238,.22); border-top: 3px dashed #5BC2EE; }
+.band span { position: absolute; top: 10px; right: 10px; background: #0A2E4C; color: #FFFFFF; font-size: .78rem; line-height: 1.3; padding: 6px 10px; border-radius: 10px; }
+.band b { color: #5BC2EE; font-size: .95rem; }
+@media (max-width: 760px) {
+  .scope { grid-template-columns: minmax(0, 1fr); }
+  .scope-text { display: contents; }
+  .scope .sec-head { order: 0; }
+  .tower { position: relative; top: 0; max-width: 280px; justify-self: center; order: 1; }
+  .scope .spots { order: 2; }
+}
+
 /* where it helps */
 .spots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .spot { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 4px; }
@@ -218,6 +235,8 @@ footer { padding-block: 22px 36px; color: var(--muted); font-size: .8rem; }
 
   <section>
     <div class="wrap">
+      <div class="scope">
+        <div class="scope-text">
       <div class="sec-head"><p class="eyebrow">איפה זה עוזר</p><h2>הפנים של הבניין, בשליטה שלכם</h2><p class="lead">הלובי, הכניסות, הוויטרינות והקומות התחתונות, עד גובה של 20 מטר, הם הפנים של הבניין והמקום שבו עוברים כל הדיירים והמבקרים. עם המכשיר, צוות האחזקה שלכם שומר עליהם נקיים ושקופים באופן קבוע ומטפל מיד בכל כתם, בלי לחכות לניקוי הכללי של כל הגובה שמגיע פעם בכמה זמן.</p></div>
       <div class="spots">
         <div class="spot"><h3>לובי וכניסה</h3><p>דלתות זכוכית, ויטרינות וחלונות גבוהים בלובי.</p></div>
@@ -226,6 +245,13 @@ footer { padding-block: 22px 36px; color: var(--muted); font-size: .8rem; }
         <div class="spot"><h3>הקומות התחתונות</h3><p>חלונות וחזית עד גובה של 20 מטר מהקרקע, עם מוט מתאים.</p></div>
         <div class="spot"><h3>רפפות ואלומיניום</h3><p>מברשת ייעודית שנכנסת למסילות ולחריצים.</p></div>
         <div class="spot"><h3>שילוט וגגונים</h3><p>שלטי זכוכית, סככות וגגוני כניסה.</p></div>
+      </div>
+        </div>
+        <figure class="tower" aria-label="מגדל מגורים, עם סימון אזור העבודה מהקרקע עד גובה 20 מטר">
+          <img src="media/buildings/tower.jpg" alt="מגדל מגורים מודרני" width="768" height="1376" loading="lazy">
+          <div class="tower-dim"></div>
+          <div class="band"><span>אזור העבודה מהקרקע<br><b>עד 20 מטר</b></span></div>
+        </figure>
       </div>
     </div>
   </section>
