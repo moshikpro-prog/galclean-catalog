@@ -21,6 +21,7 @@
 body { margin: 0; }
 img, video { max-width: 100%; }
 [hidden] { display: none !important; }
+@media (prefers-reduced-motion: reduce) { .cat-card { transition: none; } .cat-card:hover { transform: none; } }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,7 +68,7 @@ p { margin: 0; }
 .eyebrow { font-size: .8rem; font-weight: 700; letter-spacing: .06em; color: var(--brand); }
 
 /* hero band */
-.hero { background: var(--deep); color: var(--on-dark); }
+.hero { background: linear-gradient(180deg, rgba(10,46,76,.62) 0%, rgba(10,46,76,.80) 55%, rgba(10,46,76,.95) 100%), url(media/buildings/hero-bg.jpg) center 35% / cover no-repeat, var(--deep); color: var(--on-dark); }
 .hero .wrap { padding-block: 22px 40px; display: grid; gap: 16px; }
 .mark { font-family: var(--f-display); font-weight: 700; font-size: 1.4rem; direction: ltr; justify-self: end; }
 .mark b { color: var(--on-dark); font-weight: 700; }
@@ -135,11 +136,15 @@ section + section { border-top: 1px solid var(--line); }
 .price { border-top: 1px solid var(--line); padding-top: 10px; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 .price b { font-family: var(--f-display); font-size: 1.3rem; font-variant-numeric: tabular-nums; }
 .price span { font-size: .78rem; color: var(--muted); }
-.cat-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
-.cat-links a { text-decoration: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 12px; padding: 13px 16px; display: grid; gap: 2px; }
-.cat-links a:hover { border-color: var(--brand); }
-.cat-links strong { color: var(--brand); }
-.cat-links span { font-size: .85rem; color: var(--muted); }
+.cat-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+.cat-card { position: relative; overflow: hidden; text-decoration: none; color: #FFFFFF; border-radius: 18px; padding: 20px 20px 20px 132px; min-height: 150px; display: grid; align-content: center; gap: 6px; box-shadow: 0 10px 24px -14px rgba(10,46,76,.6); transition: transform .15s ease, box-shadow .15s ease; }
+.cat-card:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -14px rgba(10,46,76,.7); }
+.cat-pro { background: linear-gradient(135deg, #0A2E4C, #154B78); }
+.cat-home { background: linear-gradient(135deg, #1580C4, #3AA6E0); }
+.cat-card strong { font-family: var(--f-display); font-size: 1.2rem; line-height: 1.25; }
+.cat-card span.d { font-size: .88rem; opacity: .88; }
+.cat-card .go { justify-self: start; margin-top: 6px; background: #FFFFFF; color: #0A2E4C; font-weight: 700; font-size: .85rem; border-radius: 999px; padding: 6px 14px; }
+.cat-card img { position: absolute; left: 14px; bottom: 10px; width: 104px; height: auto; max-height: 130px; object-fit: contain; filter: drop-shadow(0 8px 10px rgba(0,0,0,.25)); }
 
 /* in-page clips */
 .clips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
@@ -164,7 +169,7 @@ section + section { border-top: 1px solid var(--line); }
 .proof strong { color: var(--brand); }
 
 /* closing CTA */
-.closing { background: var(--deep); color: var(--on-dark); }
+.closing { background: linear-gradient(180deg, rgba(10,46,76,.78), rgba(10,46,76,.92)), url(media/buildings/closing-bg.jpg) center 30% / cover no-repeat, var(--deep); color: var(--on-dark); }
 .closing .wrap { padding-block: 34px; display: grid; gap: 14px; }
 .closing h2 { color: var(--on-dark); }
 .closing p { color: var(--on-dark-muted); max-width: 60ch; }
@@ -272,8 +277,8 @@ footer { padding-block: 22px 36px; color: var(--muted); font-size: .8rem; }
         </article>
       </div>
       <div class="cat-links">
-        <a href="https://moshikpro-prog.github.io/galclean-catalog/pro.html" target="_blank" rel="noopener"><strong>הקטלוג המלא למקצועיים</strong><span>מה כלול בכל מכשיר, תמונות ואביזרים</span></a>
-        <a href="https://moshikpro-prog.github.io/galclean-catalog/" target="_blank" rel="noopener"><strong>הקטלוג לבית ולעסק קטן</strong><span>לדיירים שרוצים מכשיר לדירה</span></a>
+        <a class="cat-card cat-pro" href="https://moshikpro-prog.github.io/galclean-catalog/pro.html" target="_blank" rel="noopener"><strong>הקטלוג המלא למקצועיים</strong><span class="d">Expert, Turbo ו-Ultra: מה כלול, תמונות ואביזרים</span><span class="go">לצפייה בקטלוג ←</span><img src="media/buildings/cat-pro.webp" alt="" loading="lazy"></a>
+        <a class="cat-card cat-home" href="https://moshikpro-prog.github.io/galclean-catalog/" target="_blank" rel="noopener"><strong>הקטלוג לבית ולעסק קטן</strong><span class="d">לדיירים שרוצים מכשיר לדירה</span><span class="go">לצפייה בקטלוג ←</span><img src="media/buildings/cat-home.webp" alt="" loading="lazy"></a>
       </div>
     </div>
   </section>
