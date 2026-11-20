@@ -31,7 +31,7 @@ def tube(length, y0=0.0, holes=None):
 def end_cap(inlet=True):
     """Moulded end cap (ASA / PA12), 5 mm plate + locating plug into tube chamber."""
     plate = prism(CAP_OUTLINE, CAP_T, 0)
-    plug_poly = [(2.7, -10.3), (15.8, -10.3), (15.8, -1.3), (2.7, -1.3)]
+    plug_poly = [(1.7, -6.8), (13.8, -6.8), (13.8, -1.3), (1.7, -1.3)]
     plug = prism(plug_poly, 8, CAP_T)
     hole_len = CAP_T + 8 + 1
     bore = (cq.Workplane(cq.Plane(origin=(TUBE_C[0], -0.5, TUBE_C[1]), xDir=(1, 0, 0), normal=(0, 1, 0)))
@@ -66,7 +66,7 @@ if __name__ == "__main__":
     # --- individual production parts (1 m) ---
     export(body, "rail_body_990_6063T6", stl=False)
     export(cover, "rail_cover_990", stl=False)
-    export(man, "manifold_tube_PVDF_10x1_198x0.35", stl=False)
+    export(man, "manifold_tube_PE_10x8_198x0.35", stl=False)
     export(cap_in, "end_cap_inlet")
     export(end_cap(False), "end_cap_blind")
 

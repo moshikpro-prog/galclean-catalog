@@ -1,4 +1,4 @@
-# Self-rinsing shower-glass rail (RO/DI water) — feasibility study v0.3
+# Self-rinsing shower-glass rail (RO/DI water) — feasibility study v0.4
 
 Status: **concept / pre-prototype**. Not for production. Hebrew report: `report/index.html` (interactive 3D viewer, drawings, calculations, test plan).
 
@@ -8,6 +8,8 @@ Status: **concept / pre-prototype**. Not for production. Hebrew report: `report/
 - Main open risk (not a rail issue): film continuity on the glass. At 2 L/min/m a continuous film is predicted only for receding contact angle ≲17° (≲30° at 4 L/min/m). Must be measured (tests T0, T3, T4).
 
 - Water source (v0.2): an existing GalClean direct-flow RO unit (1–9 L/min) in a dedicated wall compartment; no tank. One rail per glass panel around the shower. Sizing rule: flow per metre of glass being rinsed ≥2 L/min (≥1.5 in winter) → Business for one panel; corner showers need sequential zones (one solenoid per panel) or Expert. Orifice diameter series Ø0.35–0.70 keeps ≈3.5 kPa per hole.
+
+- v0.4 optimal configuration (efficiency, cost, manufacturing, installation, durability): standard PE 10×8 tube (laser perforated, push-fit, no metal), hole exit 1.5 mm from the glass (drops bridge to the glass at start/stop), profile 31.6×22 mm, geometric drip groove instead of a hydrophobic tip coating, one universal end cap, field-cuttable uniform pitch, all electrics in the wall compartment with a wireless button. See report section 02.
 
 ## Contents
 | Path | What |

@@ -10,38 +10,42 @@ import math
 T_GLASS = 8.0
 
 # Aluminium body (open profile, 6063-T6). CCW polygon.
+# v0.4: tube moved 2 mm toward the glass (hole exit 1.5 mm from the glass), glass-contact land thinned to
+# 1.0 mm and ending 3 mm below the glass edge so it clears the tube; ribs and right wall shifted -2 mm.
 BODY = [(-14, -18), (-11.3, -18), (-11.3, -16.8), (-12, -16.8), (-12, 2),
-        (0.5, 2), (0.5, -4), (2.5, -4), (2.5, 2),
-        (5.5, 2), (5.5, -1.1), (6.5, -1.1), (6.5, 2),
-        (10.5, 2), (10.5, -1.1), (11.5, -1.1), (11.5, 2),
-        (16, 2), (16, -10.5), (18, -10.5), (18, -9), (17.4, -9), (17.4, -7.5), (18, -7.5),
-        (18, 3), (17, 4), (-13, 4), (-14, 3)]
+        (0.5, 2), (0.5, -3), (1.5, -3), (1.5, 2),
+        (3.5, 2), (3.5, -0.95), (4.5, -0.95), (4.5, 2),
+        (8.5, 2), (8.5, -0.95), (9.5, -0.95), (9.5, 2),
+        (14, 2), (14, -10.5), (16, -10.5), (16, -9), (15.4, -9), (15.4, -7.5), (16, -7.5),
+        (16, 3), (15, 4), (-13, 4), (-14, 3)]
 
-# Snap-on cover / slot fin (extruded aluminium or ASA). v0.3.1: the space between the fin and the tube is
-# filled by a cradle that hugs the tube from 200 deg to 270 deg. Its top slopes DOWN toward the glass
-# (contact point z=-7.21 -> fin top z=-7.6), so start/stop drips and splash drain into the slot and no
-# water can collect under the tube. Slot 1.0 mm, knife tip protrudes 1 mm below the floor as a drip break.
+# Snap-on cover / slot fin (extruded aluminium). The cradle hugs the tube from 200 to 270 deg; its top slopes
+# down toward the glass so any start/stop drip or splash drains into the slot (no stagnant pocket).
+# Slot 1.0 mm; knife tip 0.3 mm protruding 1 mm below the floor, plus a drip groove in the floor underside
+# (geometric drip break, no coating needed).
 _R = 5.05
-_ARC = [(round(8.5 + _R * math.cos(math.radians(a)), 3), round(-5.5 + _R * math.sin(math.radians(a)), 3))
+_TC = (6.5, -5.5)
+_ARC = [(round(_TC[0] + _R * math.cos(math.radians(a)), 3), round(_TC[1] + _R * math.sin(math.radians(a)), 3))
         for a in range(270, 199, -10)]
-COVER = ([(1.0, -13.5), (1.3, -13.5), (2.2, -12.5), (19.6, -12.5), (19.6, -6),
-          (18.1, -6), (18.1, -7.7), (17.5, -8.0), (17.5, -8.8), (18.1, -8.8), (18.1, -10.55)]
-         + _ARC + [(1.0, -7.6)])
+COVER = ([(1.0, -13.5), (1.3, -13.5), (2.2, -12.5), (3.0, -12.5), (3.0, -11.7), (3.8, -11.7), (3.8, -12.5),
+          (17.6, -12.5), (17.6, -6), (16.1, -6), (16.1, -7.7), (15.5, -8.0), (15.5, -8.8), (16.1, -8.8),
+          (16.1, -10.55)] + _ARC + [(1.0, -7.6)])
 
-# Manifold tube (v0.3: PVDF 10 x 1, no galvanic couple with the aluminium body)
-TUBE_C = (8.5, -5.5)
+# Manifold tube (v0.4: standard PE 10 x 8 tubing, laser perforated; no galvanic couple, push-fit native)
+TUBE_C = (6.5, -5.5)
 TUBE_OD, TUBE_ID = 10.0, 8.0
 HOLE_D = 0.35           # CNC micro-drilled or laser, +/-0.01
 HOLE_PITCH = 5.0
 HOLE_DIR = (-1.0, 0.0)  # jets toward glass, horizontal
 
 # Gaskets / blocks
-LAND_GASKET = [(0, -4), (0.5, -4), (0.5, 0), (0, 0)]                     # 0.5 mm EPDM/PE adhesive strip
+LAND_GASKET = [(0, -3), (0.5, -3), (0.5, 0), (0, 0)]                     # 0.5 mm EPDM/PE adhesive strip
 SETTING_BLOCK = [(-T_GLASS, 0), (0, 0), (0, 2), (-T_GLASS, 2)]            # EPDM 70 ShA
 WEDGE = [(-12, -16.8), (-T_GLASS, -16.8), (-T_GLASS, -1.0), (-9.5, -0.2), (-12, -0.2)]  # EPDM wedge
 
 # Functional features (for drawings)
-SLOT = dict(x0=0.0, x1=1.0, z_top=-4.0, z_fin_top=-7.6, z_exit=-13.5)
+SLOT = dict(x0=0.0, x1=1.0, z_top=-3.0, z_fin_top=-7.6, z_exit=-13.5)
+JET_TRAVEL = TUBE_C[0] - 5.0   # 1.5 mm
 JET_Z = -5.5
 
 # Hole pattern for a body length Lb (mm): uniform pitch, first/last hole half a pitch from the end walls
@@ -49,8 +53,8 @@ def hole_positions(Lb=990.0, pitch=HOLE_PITCH):
     n = int(round(Lb / pitch))
     return [round(pitch * (i + 0.5), 3) for i in range(n)]
 
-CAP_OUTLINE = [(-14, -18), (-8, -18), (-8, 0), (0, 0), (0, -14.1), (1.6, -14.1), (2.6, -13), (19.8, -13),
-               (19.8, 4.2), (17, 4.2), (-13.2, 4.2), (-14, 3.4)]
+CAP_OUTLINE = [(-14, -18), (-8, -18), (-8, 0), (0, 0), (0, -14.1), (1.6, -14.1), (2.6, -13), (17.8, -13),
+               (17.8, 4.2), (15, 4.2), (-13.2, 4.2), (-14, 3.4)]
 
 def circle(c, r, n=72):
     return [(c[0] + r * math.cos(2 * math.pi * i / n), c[1] + r * math.sin(2 * math.pi * i / n)) for i in range(n)]

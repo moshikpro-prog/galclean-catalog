@@ -19,7 +19,7 @@ TCF = lambda T: math.exp(2700 * (1 / (273.15 + T) - 1 / 298.15))      # RO tempe
 O["ro_flow_factor"] = {f"{T}C": round(1 / TCF(T), 3) for T in (12, 15, 18, 20, 25, 28)}
 SPOT_FREE_TDS = 10.0   # ppm target for final film (conservative end of 10-50 ppm vendor range)
 TAP_TDS = 450.0
-TRAVEL = 3.5e-3        # jet travel tube->glass
+TRAVEL = 1.5e-3        # jet travel tube->glass (v0.4)
 L = 1.0
 
 def Qmin_lpm_m(theta_deg, sig=sigma):
