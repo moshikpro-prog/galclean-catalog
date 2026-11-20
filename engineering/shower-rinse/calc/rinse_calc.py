@@ -292,3 +292,41 @@ md.append("\n## Draining film thickness after shut-off (µm)\n" + ", ".join(f"{k
 md.append(f"\n## DI resin life: ~{R['DI_resin']['resin_life_days_per_L']:.0f} days per litre of mixed-bed resin (4 L/day, 30 ppm permeate)")
 open(os.path.join(OUT, "calc_results.md"), "w").write("\n".join(md))
 print("\n".join(md))
+
+# ---------- 10. GalClean direct-flow RO units as the source (added v0.2) ----------
+GALCLEAN = {"Lite": 1.0, "Plus": 1.5, "Business": 2.0, "Expert": 4.0, "Turbo": 6.5, "Ultra": 9.0}  # L/min, catalog
+WINTER = 0.75     # RO permeate flow at ~15 C relative to 25 C rating (typical TCF, approx.; confirm with GalClean data)
+CONFIGS = [("דופן אחת 1.0 מ'", [1.0]), ("פינה 0.9+0.9", [0.9, 0.9]), ("פינה 1.2+0.9", [1.2, 0.9]),
+           ("חזית 1.4 + צד 0.9", [1.4, 0.9]), ("שלוש דפנות 0.9+1.4+0.9", [0.9, 1.4, 0.9])]
+gc = []
+for name, panels in CONFIGS:
+    Lt = sum(panels)
+    for model in ("Business", "Expert", "Turbo"):
+        Q = GALCLEAN[model]
+        sim = Q / Lt                          # all panels at once
+        zone = Q / max(panels)                # one panel at a time (sequential zones)
+        gc.append(dict(config=name, total_m=Lt, panels=len(panels), model=model, Q=Q,
+                       simultaneous_lpm_per_m=sim, simultaneous_winter=sim * WINTER,
+                       zoned_lpm_per_m=zone, zoned_winter=zone * WINTER,
+                       zoned_time_s=45 * len(panels), zoned_volume_L=Q * 45 * len(panels) / 60))
+R["galclean_sizing"] = gc
+
+# orifice diameter that keeps ~3.4 kPa per hole at 10 mm pitch, for a given flow per metre
+def d_for(q_lpm_m, dp=3400, pitch=0.010, Cd=0.65):
+    Qh = q_lpm_m / 60000 * pitch
+    return math.sqrt(4 * Qh / (math.pi * Cd * math.sqrt(2 * dp / rho))) * 1000
+R["hole_series"] = [dict(q_lpm_per_m=q, d_mm=round(d_for(q), 3),
+                         d_std_mm=min([0.30, 0.35, 0.40, 0.45, 0.50, 0.60, 0.70], key=lambda s: abs(s - d_for(q))))
+                    for q in (1.0, 1.5, 2.0, 3.0, 4.0, 6.0)]
+for h in R["hole_series"]:
+    dp, _ = orifice_dp(h["q_lpm_per_m"] / 60000 * 0.01, h["d_std_mm"] / 1000)
+    h["dP_kPa_std"] = dp / 1000
+json.dump(R, open(os.path.join(OUT, "calc_results.json"), "w"), indent=2, ensure_ascii=False)
+md2 = ["\n## GalClean sizing (L/min per m of glass)\n| config | m | model | simultaneous | winter | zoned | winter | zoned time s | L |\n|---|---|---|---|---|---|---|---|---|"]
+for r in gc:
+    md2.append(f"| {r['config']} | {r['total_m']:.1f} | {r['model']} | {r['simultaneous_lpm_per_m']:.2f} | {r['simultaneous_winter']:.2f} | {r['zoned_lpm_per_m']:.2f} | {r['zoned_winter']:.2f} | {r['zoned_time_s']} | {r['zoned_volume_L']:.1f} |")
+md2.append("\n## Orifice series (10 mm pitch, target 3.4 kPa)\n| L/min/m | d exact | d std | ΔP kPa |\n|---|---|---|---|")
+for h in R["hole_series"]:
+    md2.append(f"| {h['q_lpm_per_m']} | {h['d_mm']:.3f} | {h['d_std_mm']} | {h['dP_kPa_std']:.2f} |")
+open(os.path.join(OUT, "calc_results.md"), "a").write("\n".join(md2))
+print("\n".join(md2))
