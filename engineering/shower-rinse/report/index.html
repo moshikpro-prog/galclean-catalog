@@ -1,0 +1,541 @@
+<title>מסילת שטיפה למקלחון</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&family=Rubik:wght@500;600;700&display=swap">
+<style>
+/* Layout: one reading column (~72ch) for the argument; drawings, viewer and tables break out to a wider measure. */
+:root{
+  --bg:#f4f6f7; --panel:#ffffff; --fg:#14202a; --muted:#56656f; --line:#d5dce1;
+  --accent:#1b6fc2; --accent-soft:#e2eefa; --warn:#a85508; --warn-soft:#fbefe2; --ok:#2e7d32; --ok-soft:#e5f2e6;
+  --f-display:"Rubik","IBM Plex Sans Hebrew",Arial,sans-serif;
+  --f-body:"IBM Plex Sans Hebrew",Arial,"Noto Sans Hebrew",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1418; --panel:#151d23; --fg:#e3eaef; --muted:#93a2ac; --line:#28343c;
+  --accent:#5aa6f0; --accent-soft:#16283a; --warn:#f0a24b; --warn-soft:#2e2215; --ok:#7cc47f; --ok-soft:#18281a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1418; --panel:#151d23; --fg:#e3eaef; --muted:#93a2ac; --line:#28343c;
+  --accent:#5aa6f0; --accent-soft:#16283a; --warn:#f0a24b; --warn-soft:#2e2215; --ok:#7cc47f; --ok-soft:#18281a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.65;direction:rtl;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:1080px;margin:0 auto}
+.col{max-width:72ch}
+header.top{padding-block:40px 24px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.eyebrow{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(28px,4.4vw,42px);line-height:1.15;margin:.3em 0 .35em;text-wrap:balance}
+h2{font-family:var(--f-display);font-weight:600;font-size:24px;margin:56px 0 12px;text-wrap:balance;display:flex;gap:12px;align-items:baseline}
+h2 .n{font-family:var(--f-mono);font-size:14px;color:var(--accent);font-weight:500}
+h3{font-family:var(--f-display);font-weight:600;font-size:18px;margin:28px 0 8px}
+p{margin:0 0 12px}
+.lede{font-size:18px;color:var(--fg);max-width:72ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 24px;font-size:13.5px;color:var(--muted);margin-top:14px}
+.meta b{color:var(--fg);font-weight:600}
+.num,td.n,.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+.verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;margin:20px 0}
+.vcard{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px 18px;min-width:0}
+.vcard h4{margin:0 0 6px;font-family:var(--f-display);font-size:15px;font-weight:600}
+.vcard p{margin:0;font-size:14.5px;color:var(--muted)}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:1px 8px;border-radius:999px;margin-inline-start:6px;vertical-align:1px}
+.tag.th{background:var(--accent-soft);color:var(--accent)}
+.tag.ex{background:var(--warn-soft);color:var(--warn)}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}
+ul.tight{margin:0 0 12px;padding-inline-start:20px}
+ul.tight li{margin:4px 0}
+.callout{border-inline-start:3px solid var(--warn);background:var(--warn-soft);padding:12px 16px;margin:16px 0;max-width:72ch;font-size:15px}
+.callout.info{border-color:var(--accent);background:var(--accent-soft)}
+.tbl{overflow-x:auto;margin:12px 0 18px;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:8px 12px;text-align:right;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;font-size:13px;color:var(--muted);background:color-mix(in srgb,var(--panel) 80%,var(--line))}
+tr:last-child td{border-bottom:0}
+td.n{text-align:left;white-space:nowrap}
+tr.hl td{background:var(--accent-soft)}
+figure{margin:18px 0 26px}
+figure .paper{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:auto}
+figure .paper img{display:block;width:100%;min-width:720px;height:auto}
+figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+figcaption a{color:var(--accent)}
+/* viewer */
+.viewer{position:relative;background:#b9c3c9;border-radius:8px;overflow:hidden;aspect-ratio:16/9;max-width:100%;margin-top:14px}
+.viewer canvas{display:block;width:100%;height:100%}
+.vbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.vbar button{font:inherit;font-size:14px;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);cursor:pointer}
+.vbar button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.vbar button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.vnote{position:absolute;inset:auto 12px 10px auto;font-size:12px;color:#c9d4dc;background:rgba(10,14,18,.55);padding:4px 10px;border-radius:4px;max-width:70%}
+.vfail{position:absolute;inset:0;display:grid;place-items:center;color:#c9d4dc;font-size:14px;padding:24px;text-align:center}
+/* chart */
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px;position:relative;max-width:760px}
+.chart svg{display:block;width:100%;height:auto}
+.chart .ax{stroke:var(--line)} .chart .lbl{fill:var(--muted);font-size:11px;font-family:var(--f-mono)}
+.chart .ref{stroke:var(--muted);stroke-dasharray:4 3;stroke-width:1.2}
+.chart .reft{fill:var(--fg);font-size:12px;font-family:var(--f-body)}
+.chart .curve{stroke:var(--accent);stroke-width:2;fill:none}
+.chart .band{fill:var(--warn-soft)}
+.tip{position:absolute;pointer-events:none;background:var(--fg);color:var(--bg);font-size:12.5px;padding:6px 9px;border-radius:4px;white-space:nowrap;transform:translate(-50%,-120%);display:none}
+.files code{font-family:var(--f-mono);font-size:13px;direction:ltr;unicode-bidi:isolate;background:var(--panel);border:1px solid var(--line);padding:1px 6px;border-radius:4px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 12px}
+.steps li{counter-increment:s;padding-inline-start:34px;position:relative;margin:8px 0}
+.steps li::before{content:counter(s);position:absolute;inset-inline-start:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font:600 13px/24px var(--f-mono);text-align:center}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">בדיקת היתכנות הנדסית · גרסה 0.1 · 20.11.2026</div>
+  <h1>מסילת שטיפה עצמית לזכוכית מקלחון במים מטוהרים</h1>
+  <p class="lede">הרעיון בר־ביצוע, אך לא בגאומטריה שהוצעה. גלישה מעל סף רציף רגישה מדי לפילוס בספיקות של 2–4 ל'/דק'. התכנון המומלץ מחלק את המים באמצעות מפל לחץ בפיות זעירות, ומוציא אותם מסדק נימי שהזכוכית עצמה היא אחת מדפנותיו. הגורם שיכריע אם תיווצר יריעה רציפה הוא מצב פני הזכוכית, לא המסילה.</p>
+  <div class="meta"><span>ספיקת תכנון <b class="num">2 L/min</b> (בדיקה עד <span class="num">4</span>)</span><span>רוחב <b class="num">1000 mm</b></span><span>זכוכית <b class="num">6–12 mm</b></span><span>מסה <b class="num">≈0.8 kg/m</b></span><span>חתך <b class="num">34×22 mm</b></span></div>
+</header>
+
+<section class="col">
+  <h2><span class="n">01</span>תקציר ומסקנות</h2>
+  <div class="verdict" style="max-width:1080px">
+    <div class="vcard"><h4>סף גלישה רציף: לא מומלץ <span class="tag ex">נבדק בחישוב</span></h4><p>עומד הגלישה הוא 0.69 מ"מ בלבד (1.1 מ"מ ב-4 ל'/דק'). לאחידות ±10% נדרש פילוס של ±0.05 מ"מ לאורך מטר. הטיה של 1 מ"מ גורמת לפער של פי 20 בין הקצוות.</p></div>
+    <div class="vcard"><h4>סעפת לחץ + סדק נימי: מומלץ <span class="tag th">תאורטי</span></h4><p>101 פיות Ø0.5 יוצרות מפל של 3.4 kPa. הטיה של 10 מ"מ משנה את הספיקה בכ-1.4%. אין צורך במנגנון פילוס. המים יוצאים כשהם כבר על הזכוכית.</p></div>
+    <div class="vcard"><h4>רציפות היריעה תלויה בזכוכית <span class="tag ex">דורש ניסוי</span></h4><p>ב-2 ל'/דק'/מ' יריעה רציפה נשמרת רק אם זווית המגע הנסוגה קטנה מ-17° בערך. ב-4 ל'/דק' עד כ-30°. על זכוכית עם ציפוי דוחה מים (θ≈100°) יריעה רציפה אינה אפשרית בספיקות האלה.</p></div>
+    <div class="vcard"><h4>מערכת ההזנה צריכה מיכל <span class="tag ok">חישוב פשוט</span></h4><p>מערכת RO ביתית מייצרת 0.13–0.26 ל'/דק'. כדי לספק 2 ל'/דק' נדרש מיכל אגירה ומשאבת 24V, או RO בזרימה ישירה של 600 GPD ומעלה. צריכה לשטיפה: כ-1.5 ל'.</p></div>
+  </div>
+  <p>מה השתנה לעומת הרעיון המקורי: נשמרו העקרונות של קו שחרור רציף, היעדר סילונים חשופים ומסילה עצמאית שמותקנת על זכוכית קיימת. השתנה המנגנון שקובע את חלוקת המים. במקום גובה מפלס מעל סף (גרביטציה, רגישות של כ-220% למ"מ), החלוקה נקבעת במפל לחץ בפיות (רגישות של כ-0.15% למ"מ). בנוסף, במקום שפה קשיחה שמנסה לשמור מרווח קבוע מהזכוכית, הזכוכית עצמה היא הדופן הפנימית של הסדק. כך מתבטלת הבעיה של קשת הזכוכית, שיכולה להגיע ל-3 מ"מ למטר.</p>
+  <p>ההבחנה בין סוגי המסקנות מסומנת לאורך הדוח: <span class="tag th">תאורטי</span> הוא תוצאה של חישוב או מודל מקובל. <span class="tag ex">דורש ניסוי</span> מסמן הנחה שאין לה אישוש מספיק בלי מדידה. <span class="tag ok">חישוב פשוט</span> מסמן תוצאה שאין סיבה לפקפק בה.</p>
+</section>
+
+<section>
+  <h2><span class="n">02</span>המערכת מותקנת</h2>
+  <div class="viewer" id="viewer"><canvas id="cv" aria-label="הדמיה תלת-ממדית של מסילת השטיפה מותקנת על זכוכית מקלחון"></canvas><div class="vnote" id="vnote">גרירה לסיבוב · גלגלת להגדלה</div></div>
+  <div class="vbar" role="group" aria-label="מבטים">
+    <button type="button" id="b-overview" aria-pressed="true">מבט כללי</button>
+    <button type="button" id="b-close" aria-pressed="false">קרוב למסילה</button>
+    <button type="button" id="b-section" aria-pressed="false">חתך דרך המסילה</button>
+    <button type="button" id="b-water" aria-pressed="true">זרימת מים</button>
+  </div>
+  <p class="col" style="margin-top:10px;font-size:14px;color:var(--muted)">הדמיה בזמן אמת מתוך אותן קואורדינטות של קובצי ה-CAD. עובי היריעה מוגדל לצורך המחשה. במבט החתך: הסילונים יוצאים מהסעפת אופקית, פוגעים בזכוכית בתוך הסדק, והמים יוצאים מתחת לשפת הסכין כיריעה על הזכוכית.</p>
+</section>
+
+<section class="col">
+  <h2><span class="n">03</span>נתוני תכנון והנחות</h2>
+  <div class="tbl"><table>
+    <tr><th>פרמטר</th><th>ערך</th><th>מקור / הערה</th></tr>
+    <tr><td>ספיקה</td><td class="n">2 L/min (1–6 נבדק)</td><td>דרישת הלקוח; 4 ל'/דק' כחלופה</td></tr>
+    <tr><td>ספיקה ליחידת רוחב Γ</td><td class="n">0.033 kg/m·s</td><td>2 ל'/דק' על 1 מ'</td></tr>
+    <tr><td>מים</td><td class="n">25°C, σ=0.072 N/m, μ=0.89 mPa·s</td><td>RO/DI; סבון על הזכוכית מוריד σ מקומית</td></tr>
+    <tr><td>אורך נימיות √(σ/ρg)</td><td class="n">2.71 mm</td><td>מתחת לסדר גודל זה מתח הפנים שולט</td></tr>
+    <tr><td>זכוכית</td><td class="n">6–12 mm, 1000×2000</td><td>מחוסמת; קשת כללית מותרת עד 3 מ"מ/מ' (EN 12150-1)</td></tr>
+    <tr><td>TDS מי ברז</td><td class="n">≈450 mg/L</td><td>סדר גודל למרכז הארץ; יש למדוד באתר</td></tr>
+    <tr><td>מים שנשארים על הזכוכית אחרי ניקוז</td><td class="n">≈30 g/m²</td><td>הנחה <span class="tag ex">דורש ניסוי</span></td></tr>
+  </table></div>
+
+  <h3>יריעת מים על זכוכית אנכית (פתרון נוסלט)</h3>
+  <div class="tbl"><table>
+    <tr><th>ספיקה ל'/דק'/מ'</th><th>עובי δ</th><th>מהירות ממוצעת</th><th>Re</th><th>זמן מעבר 2 מ'</th></tr>
+    <tr><td class="n">1</td><td class="n">0.17 mm</td><td class="n">0.10 m/s</td><td class="n">75</td><td class="n">13 s</td></tr>
+    <tr class="hl"><td class="n">2</td><td class="n">0.21 mm</td><td class="n">0.16 m/s</td><td class="n">149</td><td class="n">8.4 s</td></tr>
+    <tr><td class="n">4</td><td class="n">0.26 mm</td><td class="n">0.25 m/s</td><td class="n">299</td><td class="n">5.3 s</td></tr>
+    <tr><td class="n">6</td><td class="n">0.30 mm</td><td class="n">0.33 m/s</td><td class="n">448</td><td class="n">4.0 s</td></tr>
+  </table></div>
+  <p>בכל התחום הזרימה למינרית־גלית (Re&lt;1000). היריעה דקה מאוד, ולכן כוחות מתח הפנים והרטבת המשטח, ולא ההידרודינמיקה, קובעים אם היא תישאר רציפה. <span class="tag ok">חישוב פשוט</span></p>
+</section>
+
+<section>
+  <div class="col">
+  <h2><span class="n">04</span>הקונספט המקורי: תא אגירה, סף גלישה ותעלה משופעת</h2>
+  <p>ספיקה מעל סף חד: q = ⅔·C<sub>d</sub>·√(2g)·h<sup>1.5</sup>. בספיקה של 2 ל'/דק'/מ' עומד הגלישה h הוא 0.69 מ"מ, רבע מאורך הנימיות. הספיקה המקומית פרופורציונלית ל-h<sup>1.5</sup>, ולכן כל שגיאת גובה של הסף מתורגמת ישירות לשינוי ספיקה:</p>
+  </div>
+  <div class="tbl" style="max-width:72ch"><table>
+    <tr><th>הטיית הסף לאורך 1 מ'</th><th>ספיקה מקס'/ממוצע</th><th>ספיקה מינ'/ממוצע</th><th>הערה</th></tr>
+    <tr><td class="n">0.1 mm</td><td class="n">1.11</td><td class="n">0.89</td><td>גבול ±10%</td></tr>
+    <tr><td class="n">0.5 mm</td><td class="n">1.57</td><td class="n">0.50</td><td>פסים בולטים</td></tr>
+    <tr><td class="n">1.0 mm</td><td class="n">2.17</td><td class="n">0.11</td><td>פי 20 בין הקצוות</td></tr>
+    <tr><td class="n">2.0 mm</td><td class="n">3.28</td><td class="n">0.00</td><td>24% מהאורך יבש</td></tr>
+  </table></div>
+  <div class="col">
+  <p>החישוב מתעלם ממתח פנים, ולכן הוא אופטימי. בעומד של פחות ממ"מ, זווית המגע וההיסטרזיס שלה מקבעים את קו המים על השפה. בפועל הגלישה צפויה להתחיל בנקודה הנמוכה ביותר ולהתרכז בה, כך שייווצרו פסים ולא יריעה. <span class="tag ex">צפוי, דורש אימות</span></p>
+  <p>בעיות נוספות של הקונספט:</p>
+  <ul class="tight">
+    <li><b>סבולות ייצור והתקנה.</b> ישרות של אקסטרוזיה סטנדרטית היא בסדר גודל של מ"מ למטר. מסילה מודפסת מ-PETG מתארכת בכ-1.4 מ"מ בהפרש טמפרטורה של 20°. כל אחד מהערכים האלה גדול פי 10–30 מהסבולת הנדרשת.</li>
+    <li><b>מרווח קבוע מהזכוכית.</b> זכוכית מחוסמת רשאית להיות בעלת קשת של עד 3 מ"מ למטר. שפה קשיחה "קרובה מאוד לזכוכית" תיגע בה במקום אחד ותתרחק ממנה במקום אחר.</li>
+    <li><b>משטח משופע.</b> זרימה על משטח נטוי איטית ועבה יותר מזרימה אנכית, ואינה יוצרת כוח רוחבי שמאחד פסים. קו מגע מתקדם על מישור נטוי נוטה לאי־יציבות של "אצבעות". השיפוע אינו מתקן את חוסר האחידות שנוצר בסף.</li>
+    <li><b>מים עומדים.</b> אחרי כל הפעלה נשארים בתא כ-100–150 מ"ל ליד הסף. זה מקום לביופילם ולמשקעים, דווקא על הקו שדורש את הדיוק הגבוה ביותר.</li>
+  </ul>
+  <p>סף משונן (חריצי V בפסיעה של 10 מ"מ) מעלה את העומד ל-2.3 מ"מ ומקטין את הרגישות לכ-110% למ"מ. זה שיפור, אבל עדיין מחייב מנגנון פילוס מדויק לכל אורך.</p>
+  </div>
+  <figure><div class="paper"><img src="drawings/S4_original_concept_analysis.svg" alt="גיליון 4: חתך סכמטי של הקונספט המקורי וגרף פיזור הספיקה כפונקציה של הטיה" loading="lazy"></div>
+  <figcaption><span>גיליון 4/5: ניתוח הקונספט המקורי והשוואת רגישות לפילוס בין שלוש שיטות חלוקה</span><a href="drawings/S4_original_concept_analysis.svg" target="_blank" rel="noopener">פתיחה בגודל מלא</a></figcaption></figure>
+</section>
+
+<section>
+  <div class="col"><h2><span class="n">05</span>חלופות שנבחנו</h2></div>
+  <div class="tbl"><table>
+    <tr><th>חלופה</th><th>מה קובע את החלוקה</th><th>רגישות לפילוס</th><th>יתרונות</th><th>חסרונות</th><th>הערכה</th></tr>
+    <tr><td><b>A. סף רציף ותעלה משופעת</b> (מקורי)</td><td>גובה מפלס מעל הסף</td><td class="n">~220%/mm</td><td>פשוט, ללא לחץ</td><td>פילוס ±0.05 מ"מ, פסים, מים עומדים</td><td>נפסלה</td></tr>
+    <tr><td><b>B. סף משונן V + סדק</b></td><td>גובה מפלס בחריצים</td><td class="n">~110%/mm</td><td>אפשרי עם מיכל גרביטציה</td><td>עדיין דורש מנגנון פילוס מדויק</td><td>גיבוי</td></tr>
+    <tr class="hl"><td><b>C. סעפת פיות בלחץ + סדק נימי צמוד־זכוכית</b></td><td>מפל לחץ בפיות</td><td class="n">~0.15%/mm</td><td>ללא פילוס, ללא מרווח קריטי, ללא מים עומדים בתא</td><td>דורש משאבה או לחץ; פיות זעירות (סינון 50 µm)</td><td>מומלצת</td></tr>
+    <tr><td><b>D. מפזר חריץ דק (Slot die)</b></td><td>רוחב החריץ</td><td class="n">נמוכה</td><td>יריעה אחידה מאוד</td><td>ספיקה ∝ רוחב³: 10% שגיאה ברוחב = 30% בספיקה; קשה לייצור באורך מטר</td><td>נפסלה</td></tr>
+    <tr><td><b>E. פיות ריסוס מניפה</b></td><td>הפיות</td><td class="n">נמוכה</td><td>לא תלוי בהרטבה; מתאים לזכוכית דוחת מים</td><td>התזות, אירוסול, ספיקה גבוהה, כיסוי לא אחיד, רעש</td><td>רק לזכוכית מצופה</td></tr>
+    <tr><td><b>F. פתיל / בד מפזר</b></td><td>נימיות בחומר</td><td class="n">נמוכה</td><td>פיזור רוחבי מצוין</td><td>היגיינה, עובש, החלפה תקופתית, שינוי ספיקה עם הזמן</td><td>נפסלה למוצר</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <div class="col">
+  <h2><span class="n">06</span>הפתרון המומלץ: סעפת לחץ עם סדק נימי צמוד־זכוכית</h2>
+  <p>המסילה היא כיפה שיושבת על שפת הזכוכית העליונה. היא מורכבת משלושה רכיבים עיקריים:</p>
+  <ol class="steps">
+    <li><b>גוף אלומיניום פתוח (6063-T6, מאולגן).</b> חתך U שנצמד לשפת הזכוכית באמצעות אטם טריז מבחוץ ורצועת מגע של 0.5 מ"מ מבפנים. רצועת המגע קובעת את מיקום הסדק ביחס לפני הזכוכית ואוטמת את החלק העליון.</li>
+    <li><b>סעפת: צינור נירוסטה 316L בקוטר 10×0.8 מ"מ.</b> בצינור 101 פיות בקוטר 0.5 מ"מ, בקידוח לייזר, בפסיעה של 10 מ"מ ובצפיפות כפולה ב-15 המ"מ הקיצוניים. הפיות מכוונות אופקית אל הזכוכית. הצינור רציף לכל האורך, נשלף ומוחלף.</li>
+    <li><b>כיסוי נשלף.</b> רצפה מתחת לצינור, סנפיר שיוצר סדק של 1.2 מ"מ מול הזכוכית ומסתיים בשפת סכין של 0.3 מ"מ, ותפס הצמדה לגוף. שליפת הכיסוי חושפת את הסדק והצינור לניקוי.</li>
+  </ol>
+  <p><b>מסלול המים.</b> מפל הלחץ בפיות (3.4 kPa ב-2 ל'/דק') גדול פי 20 ומעלה מכל הפרש לחץ לאורך הסעפת. לכן כל פייה מקבלת אותה ספיקה, ללא קשר לפילוס. כל סילון חוצה 3.5 מ"מ ופוגע בזכוכית בתוך הסדק. בסדק של 1.2 מ"מ, הנימיות מחזיקה עמודת מים של כ-6–9 מ"מ (תלוי בזוויות המגע). המים מתפזרים לרוחב ויוצאים מתחת לשפת הסכין כקו רציף, כשהם כבר צמודים לזכוכית. אין מעבר משפה לזכוכית, ואין מרווח שצריך לשמור.</p>
+  </div>
+  <figure><div class="paper"><img src="drawings/S1_section_AA.svg" alt="גיליון 1: חתך רוחב ראשי של המסילה בקנה מידה 5:1 עם מקרא ומידות" loading="lazy"></div>
+  <figcaption><span>גיליון 1/5: חתך A-A, קנה מידה 5:1</span><a href="drawings/S1_section_AA.svg" target="_blank" rel="noopener">פתיחה בגודל מלא</a></figcaption></figure>
+  <figure><div class="paper"><img src="drawings/S2_details.svg" alt="גיליון 2: פרטי הסדק, הפייה, פריסת הפיות וסבולות" loading="lazy"></div>
+  <figcaption><span>גיליון 2/5: פרט הסדק (12:1), חתך הסעפת (7:1), פריסת פיות וסבולות</span><a href="drawings/S2_details.svg" target="_blank" rel="noopener">פתיחה בגודל מלא</a></figcaption></figure>
+  <figure><div class="paper"><img src="drawings/S3_views.svg" alt="גיליון 3: מבט חזית, צד, על וקצה" loading="lazy"></div>
+  <figcaption><span>גיליון 3/5: מבטי חזית, צד, על וקצה</span><a href="drawings/S3_views.svg" target="_blank" rel="noopener">פתיחה בגודל מלא</a></figcaption></figure>
+</section>
+
+<section class="col">
+  <h2><span class="n">07</span>אחידות החלוקה לאורך המסילה</h2>
+  <p>מודל חד־ממדי של הסעפת (חיכוך, שחזור תנע, חוק הפייה בכל פתח) נפתר עבור 101 פיות:</p>
+  <div class="tbl"><table>
+    <tr><th>מקרה</th><th>ספיקה מינ'/ממוצע</th><th>מקס'/ממוצע</th><th>פיזור</th></tr>
+    <tr><td>2 ל'/דק', הזנה מקצה</td><td class="n">0.996</td><td class="n">1.014</td><td class="n">1.8%</td></tr>
+    <tr><td>2 ל'/דק', הזנה מקצה + הטיה 10 מ"מ</td><td class="n">0.990</td><td class="n">1.021</td><td class="n">3.1%</td></tr>
+    <tr><td>2 ל'/דק', הזנה מהמרכז</td><td class="n">0.999</td><td class="n">1.000</td><td class="n">0.1%</td></tr>
+    <tr><td>4 ל'/דק', הזנה מקצה</td><td class="n">0.998</td><td class="n">1.010</td><td class="n">1.2%</td></tr>
+  </table></div>
+  <p>הזנה מהקצה (בצד הקיר) מספיקה, ומאפשרת להעביר את הצינור בפינה בצורה נסתרת. <span class="tag th">תאורטי</span></p>
+  <h3>השפעת סבולת קוטר הפייה (מונטה־קרלו, 200 הרצות)</h3>
+  <div class="tbl"><table>
+    <tr><th>סטיית תקן בקוטר</th><th>CV לפייה בודדת</th><th>CV של קו היציאה אחרי הסדק</th><th>טווח p95 לאורך הקו</th></tr>
+    <tr><td class="n">5 µm</td><td class="n">2.0%</td><td class="n">1.3%</td><td class="n">8%</td></tr>
+    <tr class="hl"><td class="n">10 µm</td><td class="n">4.0%</td><td class="n">2.0%</td><td class="n">13%</td></tr>
+    <tr><td class="n">20 µm</td><td class="n">7.9%</td><td class="n">3.6%</td><td class="n">24%</td></tr>
+  </table></div>
+  <p>ההחלקה על ידי הסדק חושבה כזרימת Hele-Shaw ממקורות נקודתיים בגובה 8 מ"מ מעל קו היציאה. זהו מודל אידאלי שמניח שהסדק מלא מים מתחת לסילונים. <span class="tag ex">דורש ניסוי (T2)</span> המסקנה: קידוח לייזר בסבולת ±10 µm מספיק. קידוח מכני ידני מתאים לאבטיפוס בלבד.</p>
+</section>
+
+<section class="col">
+  <h2><span class="n">08</span>היצמדות המים לזכוכית ורציפות היריעה</h2>
+  <p>זו השאלה הקריטית בפרויקט, והיא אינה תלויה בגאומטריית המסילה. יריעה דקה על משטח מוצק נשברת לפסים כאשר הספיקה ליחידת רוחב יורדת מתחת לספיקת ההרטבה המינימלית. ספיקה זו תלויה בעיקר בזווית המגע. לפי קריטריון האנרגיה של Hobler וקריטריון מאזן הכוחות של Hartley ו-Murgatroyd (שני הקריטריונים נותנים כאן תוצאה כמעט זהה):</p>
+</section>
+<section>
+  <div class="chart" id="mwr"><div class="tip" id="tip"></div></div>
+  <p class="col" style="font-size:13.5px;color:var(--muted);margin-top:8px">ספיקת ההרטבה המינימלית (ל'/דק' למטר רוחב) כפונקציה של זווית המגע הנסוגה. הקווים המקווקווים: ספיקות התכנון. אזור צבוע: תחום זוויות טיפוסי לזכוכית מקלחון משומשת. ריחוף מעל העקומה מציג ערכים.</p>
+</section>
+<section class="col">
+  <div class="tbl"><table>
+    <tr><th>מצב הזכוכית</th><th>זווית מגע טיפוסית</th><th>2 ל'/דק'</th><th>4 ל'/דק'</th></tr>
+    <tr><td>נקייה מאוד, הידרופילית (אחרי ניקוי בצריום אוקסיד או ציפוי הידרופילי)</td><td class="n">5–15°</td><td>יריעה רציפה</td><td>יריעה רציפה</td></tr>
+    <tr><td>זכוכית רגילה, נקייה</td><td class="n">15–30°</td><td>גבולי</td><td>רציפה ברוב המקרים</td></tr>
+    <tr><td>משומשת, שאריות סבון ושומן</td><td class="n">30–60°</td><td>פסים</td><td>גבולי עד פסים</td></tr>
+    <tr><td>ציפוי דוחה מים ("Easy clean")</td><td class="n">90–110°</td><td>טיפות ופסים</td><td>טיפות ופסים</td></tr>
+  </table></div>
+  <p>הערכים בטבלה הם הערכות ספרות כלליות. יש למדוד אותם על זכוכיות אמיתיות (ניסוי T0). <span class="tag ex">דורש ניסוי</span></p>
+  <h3>מה מטה את הכף לטובת המערכת</h3>
+  <ul class="tight">
+    <li><b>הזכוכית רטובה כשהמערכת מופעלת.</b> השטיפה מתחילה מיד אחרי המקלחת. על משטח רטוב מראש, הקריטריון הרלוונטי הוא זווית המגע הנסוגה, שבזכוכית היא נמוכה בהרבה מהזווית המתקדמת.</li>
+    <li><b>דופק פתיחה.</b> הפעלה ב-4–6 ל'/דק' במשך 5–10 שניות כדי לבסס יריעה, ואחריה ירידה ל-2 ל'/דק' לשמירה עליה. היסטרזיס של הרטבה מאפשר לשמור יריעה בספיקה נמוכה מזו שנדרשה ליצירתה. זה ידוע בספרות של יריעות נופלות, אך את הערכים לזכוכית מקלחון יש למדוד (T4).</li>
+    <li><b>מעגל חיובי.</b> מים ללא מינרלים אינם משאירים אבנית, ולכן הזכוכית נשארת הידרופילית לאורך זמן. ניקוי עמוק אחד בהתקנה (הסרת אבנית ושכבת סבון) הוא חלק מהליך ההתקנה המומלץ.</li>
+    <li><b>גם רציפות חלקית מועילה.</b> טיפה שמתייבשת ממי RO/DI משאירה פי 15–90 פחות משקע מטיפה של מי ברז. המטרה העיקרית היא להחליף את מי הברז שעל הזכוכית, לא בהכרח לשמור על יריעה מושלמת עד היובש.</li>
+  </ul>
+  <div class="callout">החלטת היקף מוצר: זכוכית עם ציפוי דוחה מים אינה מתאימה למוצר במתכונת יריעה. יש להחליט אם להוציא אותה מההיקף, או לפתח לה גרסת ריסוס נפרדת (חלופה E).</div>
+
+  <h3>שולי הזכוכית ומכשולים</h3>
+  <p>בשוליים האנכיים החופשיים, מתח הפנים מכווץ את היריעה פנימה ויוצר שפה מעובה ורצועה יבשה. לכן הוגדרה צפיפות פיות כפולה ב-15 המ"מ הקיצוניים (הערך המדויק ייקבע בניסוי). צירים, ידיות ומחזיקים מפצלים את היריעה ומשאירים "צל" יבש מתחתם. המוצר מיועד בשלב ראשון לדפנות קבועות ללא אביזרים על הצד הפנימי.</p>
+</section>
+
+<section class="col">
+  <h2><span class="n">09</span>השפעת המים על איכות השטיפה</h2>
+  <p>מודל דילול פשוט (יריעה מעורבבת היטב, קבוע זמן שווה לזמן המעבר) עבור 2 ל'/דק':</p>
+  <div class="tbl"><table>
+    <tr><th>משך</th><th>נפח</th><th>שארית מי ברז ביריעה</th><th>משקע אחרי ייבוש, DI ‏5 ppm</th><th>משקע, RO בלבד 30 ppm</th></tr>
+    <tr><td class="n">30 s</td><td class="n">1.0 L</td><td class="n">7.5%</td><td class="n">1.2 mg/m²</td><td class="n">1.9 mg/m²</td></tr>
+    <tr class="hl"><td class="n">45 s</td><td class="n">1.5 L</td><td class="n">1.2%</td><td class="n">0.32 mg/m²</td><td class="n">1.1 mg/m²</td></tr>
+    <tr><td class="n">60 s</td><td class="n">2.0 L</td><td class="n">0.2%</td><td class="n">0.18 mg/m²</td><td class="n">0.93 mg/m²</td></tr>
+    <tr><td>ללא שטיפה</td><td>–</td><td class="n">100%</td><td colspan="2" class="n">13.5 mg/m²</td></tr>
+  </table></div>
+  <p>המודל מניח ערבוב מלא בין היריעה לטיפות מי הברז, ולכן הוא אופטימי. <span class="tag ex">דורש ניסוי (T5)</span> המסקנה האיכותית יציבה: שטיפה של 45–60 שניות מקטינה את המשקע בסדר גודל אחד או יותר. שלב DI אחרי ה-RO שווה את עלותו: פי 3–5 פחות משקע מ-RO לבדו. חיי שרף מעורב מוערכים בכ-8 חודשים לליטר שרף, בצריכה של 4 ל' ליום.</p>
+</section>
+
+<section class="col">
+  <h2><span class="n">10</span>התקנה ופילוס</h2>
+  <p><b>אין צורך במנגנון פילוס.</b> הטיה של 10 מ"מ לאורך המסילה משנה את הספיקה המקומית בכ-1.4% בלבד. סבולת התקנה של ±3 מ"מ היא עניין אסתטי. בזכות זה בוטלו המסגרת החיצונית וברגי הכיוון שהוצעו במקור, ואיתם מקור לתקלות ולכיול חוזר.</p>
+  <ol class="steps">
+    <li>ניקוי עמוק של הזכוכית: הסרת אבנית בחומצה מתונה וליטוש בצריום אוקסיד. מדידת זווית מגע לבקרה.</li>
+    <li>הנחת בלוק הושבה על שפת הזכוכית והדבקת רצועת המגע לגוף המסילה.</li>
+    <li>הלבשת הגוף על הזכוכית מלמעלה והחדרת אטם הטריז מהצד החיצוני. האטם נבחר לפי עובי הזכוכית: 6, 4 או 2 מ"מ לזכוכית של 8, 10 או 12 מ"מ, ו-8 מ"מ לזכוכית של 6 מ"מ.</li>
+    <li>החדרת צינור הסעפת מהקצה, כשסימון הפיות פונה לזכוכית, והרכבת פקקי הקצה.</li>
+    <li>הלבשת הכיסוי בלחיצה. חיבור צינור הזנה 3/8" במחבר דחיפה בצד הקיר.</li>
+    <li>הפעלת בדיקה: בדיקה חזותית של קו יציאה רציף, ומדידת ספיקה במד ספיקה בארון השירות.</li>
+  </ol>
+  <p><b>גרסה B לזכוכית שהשפה העליונה שלה תפוסה</b> (מוט ייצוב או קרבה לתקרה): אותו גוף, בלי הרגל החיצונית, נתלה על שלוש תפסנים עם אטם EPDM. רצועת המגע נלחצת לזכוכית באמצעות התפסנים. החלופה לא תוכננה בפירוט בגרסה זו.</p>
+  <p><b>דלת על צירים:</b> מחייבת הזנה גמישה דרך אזור הציר (צינור ספירלי). הגרסה הזו מחוץ להיקף השלב הראשון.</p>
+</section>
+
+<section>
+  <div class="col">
+  <h2><span class="n">11</span>מערכת טיהור, הזנה ובקרה</h2>
+  <ul class="tight">
+    <li><b>ספיקת RO:</b> מערכת ביתית של 50–100 GPD מייצרת 0.13–0.26 ל'/דק'. לכן מומלץ מיכל אטמוספרי של 10–20 ל' עם מצוף ומשאבת ממברנה של 24V. מיכל RO מוגז מספק לחץ דועך מ-2.8 ל-0.3 bar, ווסת ספיקה קבועה צריך כ-1 bar, ולכן חלק מנפח המיכל אינו שמיש.</li>
+    <li><b>לחץ במסילה:</b> 3.4 kPa ב-2 ל'/דק' ו-13.6 kPa ב-4 ל'/דק'. ההפסד בצינור 3/8" באורך 4 מ' הוא 11 kPa. צינור 1/4" מפסיד 75 kPa ואינו מומלץ. משאבה של 3–5 ל'/דק' ב-1–2 bar מספיקה בשפע.</li>
+    <li><b>סינון:</b> מסנן 50 µm לפני המסילה, כדי להגן על פיות של 0.5 מ"מ.</li>
+    <li><b>בקרה:</b> לחצן IPX7 או חיישן. טיימר של 30–90 שניות עם דופק פתיחה. התרעה על TDS גבוה. חיישן נזילה בארון עם ניתוק אוטומטי.</li>
+    <li><b>חשמל:</b> 24V DC (SELV) בלבד באזורי האמבטיה. ספק כוח ורכיבי 230V מחוץ לאזורים, לפי IEC 60364-7-701 ותקנות החשמל המקומיות. יש לאמת מול חשמלאי מוסמך.</li>
+    <li><b>אינסטלציה:</b> מונע זרימה חוזרת בחיבור לרשת. ניקוז תרכיז ה-RO לניקוז קבוע. מי השטיפה יורדים לניקוז המקלחת.</li>
+  </ul>
+  </div>
+  <figure><div class="paper"><img src="drawings/S5_system_schematic.svg" alt="גיליון 5: סכמת מערכת הטיהור, ההזנה והבקרה" loading="lazy"></div>
+  <figcaption><span>גיליון 5/5: סכמת מערכת</span><a href="drawings/S5_system_schematic.svg" target="_blank" rel="noopener">פתיחה בגודל מלא</a></figcaption></figure>
+</section>
+
+<section>
+  <div class="col"><h2><span class="n">12</span>מפרט חומרים, מידות וסבולות</h2></div>
+  <div class="tbl"><table>
+    <tr><th>רכיב</th><th>חומר / תהליך</th><th>מידות עיקריות</th><th>סבולת קריטית</th><th>הערות</th></tr>
+    <tr><td>גוף</td><td>Al 6063-T6, אקסטרוזיה, אילגון 15–20 µm ואטימה</td><td class="n">34×22, דופן 2.0, ≈0.39 kg/m</td><td>ישרות ≤0.5/1000 (אקסטרוזיה מדויקת או יישור)</td><td>פרופיל פתוח, תבנית פשוטה</td></tr>
+    <tr><td>כיסוי / סנפיר</td><td>Al 6063-T6 או ASA בשיחול; אבטיפוס SLA</td><td class="n">סדק 1.2, שפה 0.3</td><td class="n">רוחב סדק ±0.2</td><td>פני הסדק הידרופיליים; אפשר חריצים אורכיים עדינים</td></tr>
+    <tr><td>סעפת</td><td>צינור 316L, קידוח לייזר</td><td class="n">Ø10×0.8, 101×Ø0.5</td><td class="n">Ø פייה ±0.01, ציר ±0.5°</td><td>ללא גרד פנימי; שטיפה אחרי קידוח</td></tr>
+    <tr><td>פקקי קצה</td><td>ASA או PA12 בהזרקה; אבטיפוס הדפסה</td><td class="n">5 מ"מ + תקע מיקום</td><td class="n">קדח Ø10.2 ±0.05</td><td>טבעת O לסעפת</td></tr>
+    <tr><td>אטם טריז</td><td>EPDM 60–70 ShA</td><td class="n">לפי עובי זכוכית</td><td>–</td><td>אבטיפוס: TPU 95A מודפס</td></tr>
+    <tr><td>בלוק הושבה ורצועת מגע</td><td>EPDM 70 ShA; רצועת PE/EPDM דביקה 0.5</td><td class="n">0.5 מ"מ</td><td class="n">עובי ±0.05</td><td>הרצועה קובעת את רוחב הסדק</td></tr>
+    <tr><td>מחבר הזנה</td><td>מחבר דחיפה POM/נירוסטה</td><td class="n">Ø10 ↔ 3/8"</td><td>–</td><td>בצד הקיר</td></tr>
+  </table></div>
+  <div class="col">
+  <p><b>חוזק ועמידות.</b> המסילה נשענת על הזכוכית לכל אורכה ואינה נושאת עומס מבני. הלחץ הפנימי (פחות מ-0.15 bar) זניח, והסעפת תיבדק ל-1 bar. ההתפשטות התרמית ההפרשית בין אלומיניום לנירוסטה היא כ-0.15 מ"מ למטר ב-ΔT של 20°, והצינור צף בתושבתו. לאבטיפוס מודפס יש להימנע מ-PLA, שמתרכך ב-55–60°C. PETG או ASA מתאימים.</p>
+  <p><b>מסלול לייצור.</b> אבטיפוס בהדפסה, אחריו 1 מ' ממוטות אלומיניום וצינור קדוח, ואחריו תבנית אקסטרוזיה לגוף ולכיסוי. תבנית לפרופיל פתוח בגודל הזה זולה יחסית (בדרך כלל אלפי דולרים בודדים, יש לקבל הצעות מחיר). סדרת אורכים (600–1400 מ"מ) מתקבלת מחיתוך הפרופיל ומדפוס פיות לכל אורך.</p>
+  </div>
+</section>
+
+<section class="col">
+  <h2><span class="n">13</span>תוכנית ניסויים</h2>
+  <div class="tbl"><table>
+    <tr><th>שלב</th><th>מטרה</th><th>שיטה</th><th>קריטריון הצלחה</th></tr>
+    <tr><td class="n">T0</td><td>מצב זכוכיות אמיתיות</td><td>זוויות מגע מתקדמת ונסוגה (טיפה יושבת, צילום) על 10 ומעלה זכוכיות: חדשות, משומשות ומצופות</td><td>החלטת היקף מוצר וקביעת ספיקת תכנון</td></tr>
+    <tr><td class="n">T1</td><td>חלוקת הסעפת</td><td>מקטע 300 מ"מ ואחריו 1 מ'. איסוף בקולטן מסרק של 20 תאים × 50 מ"מ, שקילה. 1/2/3/4 ל'/דק', הטיות 0/5/10 מ"מ</td><td>CV ≤5%; כל תא בטווח ±10%</td></tr>
+    <tr><td class="n">T2</td><td>איחוד הסילונים בסדק</td><td>כיסויים עם סדק 0.8/1.2/1.6 מ"מ, צבע מזון, צילום מאקרו והילוך איטי</td><td>קו יציאה רציף ללא פערים בכל הספיקות</td></tr>
+    <tr><td class="n">T3</td><td>רציפות יריעה על הזכוכית</td><td>מתקן אנכי 1×2 מ'. פלואורסצאין עם תאורת UV וניתוח תמונה של השטח הרטוב. סריקת ספיקה עולה ויורדת</td><td>≥95% שטח רטוב בספיקת התכנון; מדידת Q יצירה ו-Q שבירה</td></tr>
+    <tr><td class="n">T4</td><td>דופק פתיחה</td><td>4–6 ל'/דק' במשך 5–10 שניות, אחר כך 2 ל'/דק'. שטח רטוב כפונקציה של זמן</td><td>שמירת ≥95% במשך 45 שניות</td></tr>
+    <tr><td class="n">T5</td><td>יעילות שטיפה</td><td>מחזור מקלחת מדומה (מי ברז וסבון), שטיפה וייבוש. מוליכות בשטיפת ביקורת, ספירת כתמים וצילום אובך בתאורה קבועה. 30 מחזורים. השוואה ללא שטיפה ולמגב</td><td>משקע ≤10% מהביקורת; ללא אובך נראה אחרי 30 מחזורים</td></tr>
+    <tr><td class="n">T6</td><td>צריכת מים וזמן</td><td>מד ספיקה, אופטימיזציה של משך ודופק</td><td>≤2 ל' לשטיפה בתוצאת T5</td></tr>
+    <tr><td class="n">T7</td><td>עמידות</td><td>5,000 מחזורים, מחזורי טמפרטורה 15–50°C, הזרקת חלקיקים, 30 יום עמידה ובדיקת ביופילם, מבחן שליפת תפס</td><td>שינוי ספיקה ≤5%; ללא דליפה; ללא סתימה</td></tr>
+    <tr><td class="n">T8</td><td>התקנה בשטח</td><td>3 מתקינים, 3 עוביי זכוכית, זכוכית לא מפולסת</td><td>≤30 דקות למסילה; ללא כלים מיוחדים</td></tr>
+  </table></div>
+  <p>הסדר מכוון: T0 ו-T3 מכריעים את ההיתכנות המסחרית ודורשים רק מקטע מסילה פשוט וזכוכית. מומלץ לבצע אותם לפני השקעה בתבנית.</p>
+</section>
+
+<section class="col">
+  <h2><span class="n">14</span>סיכונים ושאלות פתוחות</h2>
+  <div class="tbl"><table>
+    <tr><th>טענה / הנחה</th><th>סטטוס</th><th>השפעה אם שגויה</th></tr>
+    <tr><td>החלוקה אחידה ובלתי תלויה בפילוס</td><td><span class="tag th">תאורטי, ביטחון גבוה</span></td><td>נמוכה: אפשר להקטין את קוטר הפיות</td></tr>
+    <tr><td>הסדק מאחד את הסילונים לקו רציף</td><td><span class="tag ex">דורש ניסוי</span></td><td>בינונית: שינוי רוחב הסדק, גובה הסילון או פסיעת הפיות</td></tr>
+    <tr><td>יריעה רציפה נשמרת ב-2 ל'/דק'</td><td><span class="tag ex">דורש ניסוי, סיכון עיקרי</span></td><td>גבוהה: העלאת ספיקה, דופק פתיחה, או הגבלה לזכוכית הידרופילית</td></tr>
+    <tr><td>המים אינם נצמדים לשפת הסנפיר ומטפטפים ממנה</td><td><span class="tag ex">דורש ניסוי</span></td><td>נמוכה: שינוי זווית השפה או ציפוי הידרופובי מקומי בקצה</td></tr>
+    <tr><td>45 שניות מספיקות לדילול מי הברז</td><td><span class="tag ex">דורש ניסוי</span></td><td>נמוכה: הארכת זמן; עלות של כ-0.5 ל' לכל 15 שניות</td></tr>
+    <tr><td>אין הצטברות ביולוגית בסדק ובסעפת</td><td><span class="tag ex">דורש ניסוי</span></td><td>בינונית: שטיפה תקופתית אוטומטית או ייבוש</td></tr>
+    <tr><td>התזות מקלחת לתוך הסדק אינן גורמות לאבנית</td><td><span class="tag th">סביר, כי השטיפה מנקה אחרי כל שימוש</span></td><td>בינונית: הכיסוי נשלף לניקוי</td></tr>
+  </table></div>
+</section>
+
+<section class="col files">
+  <h2><span class="n">15</span>קבצים</h2>
+  <p>כל הקבצים במאגר, בתיקייה <code>engineering/shower-rinse/</code>. השרטוטים, ה-CAD וההדמיה נבנים מאותו קובץ גאומטריה.</p>
+  <ul class="tight">
+    <li><code>calc/rinse_calc.py</code>: כל החישובים. פלט ב-<code>calc/results/</code>.</li>
+    <li><code>cad/geometry.py</code>: מקור יחיד לחתך המסילה. <code>cad/build_cad.py</code> מייצר את הקבצים.</li>
+    <li><code>cad/out/*.step</code>: גוף, כיסוי, סעפת קדוחה, פקקי קצה, הרכבה של 1 מ' על זכוכית.</li>
+    <li><code>cad/out/PRINT_*.stl</code>: מקטעי 247.5 מ"מ להדפסה (×4), אטם TPU. <code>TEST300_*</code>: מקטע ניסוי של 300 מ"מ עם שלושה כיסויים (סדק 0.8, 1.2, 1.6).</li>
+    <li><code>drawings/S1–S5.svg</code>: חמישה גיליונות A3.</li>
+    <li><code>renders/*.png</code>: הדמיות סטטיות.</li>
+  </ul>
+  <div class="callout info">קובצי ה-STL וה-STEP הם לאבטיפוס ניסוי בלבד. שפת הסכין (0.3 מ"מ) קרובה לגבול הרזולוציה של FDM, ולכן לכיסוי מומלצת הדפסת SLA. גרסת ייצור תוכן רק אחרי תוצאות T0–T3.</div>
+</section>
+</div>
+
+<script id="geom" type="application/json">{"BODY": [[-14, -18], [-11.3, -18], [-11.3, -16.8], [-12, -16.8], [-12, 2], [0.5, 2], [0.5, -4], [2.5, -4], [2.5, 2], [5.5, 2], [5.5, -1.1], [6.5, -1.1], [6.5, 2], [10.5, 2], [10.5, -1.1], [11.5, -1.1], [11.5, 2], [16, 2], [16, -10.5], [18, -10.5], [18, -9], [17.4, -9], [17.4, -7.5], [18, -7.5], [18, 3], [17, 4], [-13, 4], [-14, 3]], "COVER": [[1.2, -17], [1.5, -17], [2.7, -15], [2.7, -12.5], [19.6, -12.5], [19.6, -6], [18.1, -6], [18.1, -7.7], [17.5, -8.0], [17.5, -8.8], [18.1, -8.8], [18.1, -10.5], [1.2, -10.5]], "LAND": [[0, -4], [0.5, -4], [0.5, 0], [0, 0]], "BLOCK": [[-8.0, 0], [0, 0], [0, 2], [-8.0, 2]], "WEDGE": [[-12, -16.8], [-8.0, -16.8], [-8.0, -1.0], [-9.5, -0.2], [-12, -0.2]], "TUBE_C": [8.5, -5.5], "OD": 10.0, "ID": 8.4, "JET_Z": -5.5, "HOLES": [5.0, 10.0, 15.0, 25.0, 35.0, 45.0, 55.0, 65.0, 75.0, 85.0, 95.0, 105.0, 115.0, 125.0, 135.0, 145.0, 155.0, 165.0, 175.0, 185.0, 195.0, 205.0, 215.0, 225.0, 235.0, 245.0, 255.0, 265.0, 275.0, 285.0, 295.0, 305.0, 315.0, 325.0, 335.0, 345.0, 355.0, 365.0, 375.0, 385.0, 395.0, 405.0, 415.0, 425.0, 435.0, 445.0, 455.0, 465.0, 475.0, 485.0, 495.0, 505.0, 515.0, 525.0, 535.0, 545.0, 555.0, 565.0, 575.0, 585.0, 595.0, 605.0, 615.0, 625.0, 635.0, 645.0, 655.0, 665.0, 675.0, 685.0, 695.0, 705.0, 715.0, 725.0, 735.0, 745.0, 755.0, 765.0, 775.0, 785.0, 795.0, 805.0, 815.0, 825.0, 835.0, 845.0, 855.0, 865.0, 875.0, 885.0, 895.0, 905.0, 915.0, 925.0, 935.0, 945.0, 955.0, 965.0, 975.0, 980.0, 985.0]}</script>
+<script>
+/* ---------- minimum wetting rate chart ---------- */
+(function(){
+  const data=[[5,0.46],[10,1.05],[15,1.71],[20,2.41],[30,3.88],[40,5.43],[50,6.99],[60,8.56],[75,10.84],[90,12.97],[105,14.89]];
+  const W=720,H=330,m={l:52,r:18,t:16,b:44};
+  const x=t=>m.l+(t/110)*(W-m.l-m.r), y=q=>H-m.b-(q/16)*(H-m.t-m.b);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="ספיקת הרטבה מינימלית כפונקציה של זווית מגע">`;
+  s+=`<rect class="band" x="${x(30)}" y="${m.t}" width="${x(60)-x(30)}" height="${H-m.t-m.b}"/>`;
+  for(let q=0;q<=16;q+=4){s+=`<line class="ax" x1="${m.l}" x2="${W-m.r}" y1="${y(q)}" y2="${y(q)}"/><text class="lbl" x="${m.l-8}" y="${y(q)+4}" text-anchor="end">${q}</text>`}
+  for(let t=0;t<=110;t+=15){s+=`<text class="lbl" x="${x(t)}" y="${H-m.b+16}" text-anchor="middle">${t}°</text>`}
+  s+=`<text class="lbl" x="${(m.l+W-m.r)/2}" y="${H-6}" text-anchor="middle">זווית מגע נסוגה θ</text>`;
+  s+=`<text class="lbl" x="14" y="${(m.t+H-m.b)/2}" text-anchor="middle" transform="rotate(-90 14 ${(m.t+H-m.b)/2})">ל'/דק' למטר</text>`;
+  [[2,'2 ל\'/דק\' – תכנון'],[4,'4 ל\'/דק\'']].forEach(([q,l])=>{s+=`<line class="ref" x1="${m.l}" x2="${W-m.r}" y1="${y(q)}" y2="${y(q)}"/><text class="reft" x="${W-m.r-4}" y="${y(q)-6}" text-anchor="end">${l}</text>`});
+  s+=`<text class="reft" x="${x(45)}" y="${m.t+16}" text-anchor="middle">זכוכית משומשת</text>`;
+  s+=`<path class="curve" d="M${data.map(d=>x(d[0])+','+y(d[1])).join(' L')}"/>`;
+  data.forEach(d=>{s+=`<circle cx="${x(d[0])}" cy="${y(d[1])}" r="4" fill="var(--accent)" stroke="var(--panel)" stroke-width="2"/><circle class="hit" data-t="${d[0]}" data-q="${d[1]}" cx="${x(d[0])}" cy="${y(d[1])}" r="12" fill="transparent"/>`});
+  s+=`</svg>`;
+  const el=document.getElementById('mwr'); el.insertAdjacentHTML('beforeend',s);
+  const tip=document.getElementById('tip');
+  el.querySelectorAll('.hit').forEach(c=>{
+    c.addEventListener('mouseenter',()=>{const r=el.getBoundingClientRect(),b=c.getBoundingClientRect();
+      tip.textContent=`θ=${c.dataset.t}° · ספיקה מינימלית ${c.dataset.q} ל'/דק'/מ'`;
+      tip.style.left=(b.left+b.width/2-r.left)+'px'; tip.style.top=(b.top-r.top)+'px'; tip.style.display='block'});
+    c.addEventListener('mouseleave',()=>tip.style.display='none');
+  });
+})();
+</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const G = JSON.parse(document.getElementById('geom').textContent);
+const box = document.getElementById('viewer'), canvas = document.getElementById('cv');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true }); }
+catch (e) { box.insertAdjacentHTML('beforeend', '<div class="vfail">הדפדפן אינו תומך ב-WebGL. השרטוטים וההדמיות הסטטיות במאגר מציגים את אותו תכנון.</div>'); throw e; }
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+renderer.localClippingEnabled = true;
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xb9c3c9);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+const camera = new THREE.PerspectiveCamera(38, 16 / 9, 0.002, 50);
+const controls = new OrbitControls(camera, canvas); controls.enableDamping = true;
+
+const HG = 2.0, LG = 1.0, mm = 0.001;          // glass top height, glass width
+const clip = new THREE.Plane(new THREE.Vector3(1, 0, 0), 0); let clipOn = false;
+const clipList = () => clipOn ? [clip] : [];
+const mats = [];
+function mat(o) { const m = new THREE.MeshPhysicalMaterial(o); mats.push(m); return m; }
+
+// profile (x: away from glass, z: up)  ->  three: z = x, y = HG + z ; extruded along -X then moved to x = L end
+function shapeFrom(pts, holes) {
+  const s = new THREE.Shape(pts.map(p => new THREE.Vector2(p[0] * mm, p[1] * mm)));
+  (holes || []).forEach(h => s.holes.push(new THREE.Path(h.map(p => new THREE.Vector2(p[0] * mm, p[1] * mm)))));
+  return s;
+}
+const basis = new THREE.Matrix4().makeBasis(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 1, 0), new THREE.Vector3(-1, 0, 0));
+function prism(pts, x0, x1, m, holes) {
+  const g = new THREE.ExtrudeGeometry(shapeFrom(pts, holes), { depth: x1 - x0, bevelEnabled: false, curveSegments: 40 });
+  g.applyMatrix4(basis); g.translate(x1, HG, 0);
+  const me = new THREE.Mesh(g, m); scene.add(me); return me;
+}
+const circ = (c, r, n = 48) => Array.from({ length: n }, (_, i) => [c[0] + r * Math.cos(2 * Math.PI * i / n), c[1] + r * Math.sin(2 * Math.PI * i / n)]);
+
+// textures
+function tileTex(c1, c2, n) {
+  const cv = document.createElement('canvas'); cv.width = cv.height = 512; const x = cv.getContext('2d');
+  x.fillStyle = c2; x.fillRect(0, 0, 512, 512);
+  const s = 512 / n; for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) { const v = Math.random() * 10 - 5; x.fillStyle = `hsl(200,6%,${parseFloat(c1) + v * 0.4}%)`; x.fillRect(i * s + 2, j * s + 2, s - 4, s - 4); }
+  const t = new THREE.CanvasTexture(cv); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const wallT = tileTex('86', '#b9bdbf', 4); wallT.repeat.set(7, 4.5);
+const floorT = tileTex('52', '#6d7275', 4); floorT.repeat.set(7, 7);
+const wallM = mat({ map: wallT, roughness: 0.35, clearcoat: 0.3 });
+const back = new THREE.Mesh(new THREE.PlaneGeometry(4, 2.6), wallM); back.rotation.y = Math.PI / 2; back.position.set(-0.002, 1.3, 1.4); scene.add(back);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), mat({ map: floorT, roughness: 0.6 })); floor.rotation.x = -Math.PI / 2; floor.position.set(1.6, 0, 1.6); scene.add(floor);
+// shower head
+const chrome = mat({ color: 0xdfe3e6, metalness: 1, roughness: 0.12 });
+const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.01, 0.3, 24), chrome); arm.rotation.z = Math.PI / 2; arm.position.set(0.15, 2.05, 0.55); scene.add(arm);
+const head = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.11, 0.012, 48), chrome); head.position.set(0.3, 2.04, 0.55); scene.add(head);
+
+// glass
+const glassM = mat({ color: 0xeaf6f8, metalness: 0, roughness: 0.03, transmission: 1, thickness: 0.008, ior: 1.52, transparent: true, opacity: 1, side: THREE.DoubleSide });
+prism([[-8, -HG / mm + 10], [0, -HG / mm + 10], [0, 0], [-8, 0]], 0.003, LG, glassM);
+// rail parts
+const alu = mat({ color: 0xc9ced2, metalness: 1, roughness: 0.32, side: THREE.DoubleSide });
+const alu2 = mat({ color: 0xb4babe, metalness: 1, roughness: 0.38, side: THREE.DoubleSide });
+const dark = mat({ color: 0x1d1f22, roughness: 0.6, side: THREE.DoubleSide });
+const ss = mat({ color: 0x9aa1a7, metalness: 1, roughness: 0.25, side: THREE.DoubleSide });
+const x0 = 0.008, x1 = LG - 0.005;
+prism(G.BODY, x0, x1, alu); prism(G.COVER, x0, x1, alu2);
+[G.LAND, G.BLOCK, G.WEDGE].forEach(p => prism(p, x0, x1, dark));
+prism(circ(G.TUBE_C, G.OD / 2), x0 - 0.004, x1, ss, [circ(G.TUBE_C, G.ID / 2).reverse()]);
+const capOutline = [[-14, -18], [-8, -18], [-8, 0], [0, 0], [0, -17.6], [1.6, -17.6], [2.9, -15], [2.9, -13], [19.8, -13], [19.8, 4.2], [17, 4.2], [-13.2, 4.2], [-14, 3.4]];
+const capM = mat({ color: 0x2a2c30, roughness: 0.45, side: THREE.DoubleSide });
+prism(capOutline, 0.003, x0, capM); prism(capOutline, x1, LG, capM);
+// supply hose into wall
+const hoseM = mat({ color: 0xf2f4f5, roughness: 0.4, transmission: 0.2 });
+const hc = new THREE.CatmullRomCurve3([new THREE.Vector3(0.004, HG - 0.0055, 0.0085), new THREE.Vector3(-0.0, HG - 0.0055, 0.0085), new THREE.Vector3(-0.001, HG - 0.03, 0.012)]);
+const hose = new THREE.Mesh(new THREE.TubeGeometry(hc, 20, 0.0048, 16), hoseM); scene.add(hose);
+
+// water film (animated shader)
+const filmU = { uTime: { value: 0 }, uOn: { value: 1 } };
+const filmM = new THREE.ShaderMaterial({
+  uniforms: filmU, transparent: true, depthWrite: false, side: THREE.DoubleSide, clipping: true,
+  vertexShader: `#include <clipping_planes_pars_vertex>
+    varying vec2 vUv; varying vec3 vN; varying vec3 vV;
+    void main(){ vUv=uv; vec4 mvPosition=modelViewMatrix*vec4(position,1.); vV=-mvPosition.xyz; vN=normalMatrix*normal;
+    #include <clipping_planes_vertex>
+    gl_Position=projectionMatrix*mvPosition; }`,
+  fragmentShader: `#include <clipping_planes_pars_fragment>
+    uniform float uTime; uniform float uOn; varying vec2 vUv; varying vec3 vN; varying vec3 vV;
+    float h(float n){return fract(sin(n*91.7)*43758.5);}
+    float n1(float x){float i=floor(x),f=fract(x);return mix(h(i),h(i+1.),f*f*(3.-2.*f));}
+    void main(){
+      #include <clipping_planes_fragment>
+      float x=vUv.x*260., yv=vUv.y;
+      float lanes=n1(x)*.6+n1(x*3.1)*.4;
+      float flow=n1(yv*18.+uTime*2.2+lanes*7.)*.5+n1(yv*55.+uTime*5.+x*.3)*.5;
+      float streak=smoothstep(.55,.95,flow)*(.4+.6*lanes);
+      float fres=pow(1.-abs(dot(normalize(vN),normalize(vV))),2.);
+      float a=(.10+.22*streak+.35*fres)*uOn;
+      vec3 c=mix(vec3(.55,.75,.95),vec3(.95,.98,1.),streak*.7+fres*.5);
+      gl_FragColor=vec4(c,a);
+    }`
+});
+const filmH = HG - 0.017 - 0.012;
+const film = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, filmH), filmM);
+film.position.set((x0 + x1) / 2, 0.012 + filmH / 2, 0.0004); scene.add(film);
+// slot water + jets (visible in close views)
+const waterM = mat({ color: 0x5aa0e6, roughness: 0.1, transmission: 0.3, transparent: true, opacity: 0.85, side: THREE.DoubleSide });
+const slotPoly = [[0, -4.6], [0.35, -5.2], [0.6, -10.5], [1.15, -12], [1.15, -17], [0.3, -18.2], [0.3, -40], [0, -40]];
+const slotW = prism(slotPoly, x0, x1, waterM);
+const jets = new THREE.Group(); scene.add(jets);
+const jetG = new THREE.CylinderGeometry(0.00025, 0.00025, 0.0035, 8); jetG.rotateX(Math.PI / 2);
+const jetM = mat({ color: 0x3d8de0, emissive: 0x0a2a55, roughness: 0.2 });
+G.HOLES.forEach(p => { const j = new THREE.Mesh(jetG, jetM); j.position.set(0.005 + p * mm, HG + G.JET_Z * mm, 0.00175); jets.add(j); });
+// section caps (only in section view)
+const caps = new THREE.Group(); scene.add(caps); caps.visible = false;
+function cap(pts, color, holes) {
+  const g = new THREE.ShapeGeometry(shapeFrom(pts, holes)); g.applyMatrix4(basis);
+  const m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide })); caps.add(m); return m;
+}
+cap(G.BODY, 0xd7dce0); cap(G.COVER, 0xbcc3c8); [G.LAND, G.BLOCK, G.WEDGE].forEach(p => cap(p, 0x2b2b2b));
+cap(circ(G.TUBE_C, G.OD / 2), 0x8e959b, [circ(G.TUBE_C, G.ID / 2).reverse()]); cap(circ(G.TUBE_C, G.ID / 2), 0x9cc9f5);
+cap([[-8, -60], [0, -60], [0, 0], [-8, 0]], 0xcfe8f0); cap(slotPoly.map(p => p[1] === -40 ? [p[0], -60] : p), 0x3f8fe0);
+function setCapsX(x) { caps.children.forEach(m => { m.position.set(x - 0.00005, HG, 0); }); }
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x445566, 0.6));
+const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(1.5, 3, 2); scene.add(sun);
+
+// views
+const views = {
+  overview: { p: [1.55, 1.45, 3.6], t: [0.45, 1.0, 0.0] },
+  close: { p: [0.62, 2.07, 0.12], t: [0.44, 1.985, 0.0] },
+  section: { p: [0.38, 1.997, 0.026], t: [0.5, 1.9935, 0.004] },
+};
+let cur = 'overview';
+function setView(v, instant) {
+  cur = v; const V = views[v];
+  clipOn = v === 'section'; clip.constant = -0.5; mats.forEach(m => { m.clippingPlanes = clipList(); m.needsUpdate = true; });
+  filmM.clippingPlanes = clipList(); caps.visible = clipOn; setCapsX(0.5);
+  jets.visible = v !== 'overview'; slotW.visible = v !== 'overview'; film.visible = v !== 'section';
+  camera.position.set(...V.p); controls.target.set(...V.t); controls.update();
+  ['overview', 'close', 'section'].forEach(k => document.getElementById('b-' + k).setAttribute('aria-pressed', k === v));
+  document.getElementById('vnote').textContent = v === 'section' ? 'חתך במרכז המסילה · כחול: מים מטוהרים' : 'גרירה לסיבוב · גלגלת להגדלה';
+}
+['overview', 'close', 'section'].forEach(k => document.getElementById('b-' + k).addEventListener('click', () => setView(k)));
+let waterOn = true;
+document.getElementById('b-water').addEventListener('click', e => { waterOn = !waterOn; e.currentTarget.setAttribute('aria-pressed', waterOn); filmU.uOn.value = waterOn ? 1 : 0; jets.children.forEach(j => j.visible = waterOn); slotW.visible = waterOn && cur !== 'overview'; });
+const qv = new URLSearchParams(location.search).get('view'); setView(views[qv] ? qv : 'overview');
+
+function resize() { const w = box.clientWidth, h = box.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+new ResizeObserver(resize).observe(box); resize();
+const clock = new THREE.Clock();
+renderer.setAnimationLoop(() => { if (!reduce) filmU.uTime.value = clock.getElapsedTime(); controls.update(); renderer.render(scene, camera); });
+window.__ready = true;
+</script>

@@ -1,0 +1,700 @@
+{
+  "props": {
+    "rho": 997.0,
+    "mu": 0.00089,
+    "sigma": 0.072,
+    "capillary_length_mm": 2.7132147249555367
+  },
+  "film": [
+    {
+      "Q_lpm": 1.0,
+      "q_m2s": 1.6666666666666667e-05,
+      "Gamma": 0.01661666666666667,
+      "delta_mm": 0.1657036017651507,
+      "u_mean": 0.10058119732537914,
+      "u_surface": 0.1508717959880687,
+      "Re_film": 74.68164794007492,
+      "transit_s": 13.256288141212057,
+      "film_volume_L": 0.3314072035303014
+    },
+    {
+      "Q_lpm": 2.0,
+      "q_m2s": 3.3333333333333335e-05,
+      "Gamma": 0.03323333333333334,
+      "delta_mm": 0.20877345590731064,
+      "u_mean": 0.1596626984425279,
+      "u_surface": 0.23949404766379184,
+      "Re_film": 149.36329588014985,
+      "transit_s": 8.350938236292425,
+      "film_volume_L": 0.4175469118146213
+    },
+    {
+      "Q_lpm": 3.0,
+      "q_m2s": 5e-05,
+      "Gamma": 0.049850000000000005,
+      "delta_mm": 0.23898594844417853,
+      "u_mean": 0.20921732145971259,
+      "u_surface": 0.31382598218956886,
+      "Re_film": 224.04494382022474,
+      "transit_s": 6.372958625178095,
+      "film_volume_L": 0.47797189688835706
+    },
+    {
+      "Q_lpm": 4.0,
+      "q_m2s": 6.666666666666667e-05,
+      "Gamma": 0.06646666666666667,
+      "delta_mm": 0.26303807175691984,
+      "u_mean": 0.2534487354677502,
+      "u_surface": 0.38017310320162534,
+      "Re_film": 298.7265917602997,
+      "transit_s": 5.260761435138396,
+      "film_volume_L": 0.5260761435138397
+    },
+    {
+      "Q_lpm": 6.0,
+      "q_m2s": 0.0001,
+      "Gamma": 0.09970000000000001,
+      "delta_mm": 0.30110342707391147,
+      "u_mean": 0.33211179617511666,
+      "u_surface": 0.498167694262675,
+      "Re_film": 448.0898876404495,
+      "transit_s": 4.014712360985487,
+      "film_volume_L": 0.6022068541478229
+    }
+  ],
+  "min_wetting": [
+    {
+      "theta_deg": 5,
+      "Gmin_HM": 0.007617332362629638,
+      "Gmin_Hobler": 0.007628685330919648,
+      "Qmin_lpm_per_m_HM": 0.45841518731973746,
+      "Qmin_lpm_per_m_Hobler": 0.45909841510048033
+    },
+    {
+      "theta_deg": 10,
+      "Gmin_HM": 0.01748004882570977,
+      "Gmin_Hobler": 0.01750610131109162,
+      "Qmin_lpm_per_m_HM": 1.0519588059604676,
+      "Qmin_lpm_per_m_Hobler": 1.0535266586414216
+    },
+    {
+      "theta_deg": 15,
+      "Gmin_HM": 0.028380800041812797,
+      "Gmin_Hobler": 0.02842309914438322,
+      "Qmin_lpm_per_m_HM": 1.7079719182635587,
+      "Qmin_lpm_per_m_Hobler": 1.7105175011664926
+    },
+    {
+      "theta_deg": 20,
+      "Gmin_HM": 0.039975297767722816,
+      "Gmin_Hobler": 0.04003487745603563,
+      "Qmin_lpm_per_m_HM": 2.4057350712772,
+      "Qmin_lpm_per_m_Hobler": 2.4093206091897073
+    },
+    {
+      "theta_deg": 30,
+      "Gmin_HM": 0.06453315648007513,
+      "Gmin_Hobler": 0.06462933751095241,
+      "Qmin_lpm_per_m_HM": 3.8836403097337087,
+      "Qmin_lpm_per_m_Hobler": 3.8894285362659433
+    },
+    {
+      "theta_deg": 40,
+      "Gmin_HM": 0.090167380504133,
+      "Gmin_Hobler": 0.09030176710601986,
+      "Qmin_lpm_per_m_HM": 5.426321795634885,
+      "Qmin_lpm_per_m_Hobler": 5.434409254123562
+    },
+    {
+      "theta_deg": 50,
+      "Gmin_HM": 0.1162319014870903,
+      "Gmin_Hobler": 0.11640513498000503,
+      "Qmin_lpm_per_m_HM": 6.994898785582165,
+      "Qmin_lpm_per_m_Hobler": 7.005324071013342
+    },
+    {
+      "theta_deg": 60,
+      "Gmin_HM": 0.1422169749239459,
+      "Gmin_Hobler": 0.142428936898263,
+      "Qmin_lpm_per_m_HM": 8.558694579174276,
+      "Qmin_lpm_per_m_Hobler": 8.571450565592558
+    },
+    {
+      "theta_deg": 75,
+      "Gmin_HM": 0.1801042597881302,
+      "Gmin_Hobler": 0.18037268944997636,
+      "Qmin_lpm_per_m_HM": 10.838771902996802,
+      "Qmin_lpm_per_m_Hobler": 10.854926145434886
+    },
+    {
+      "theta_deg": 90,
+      "Gmin_HM": 0.21556062493121864,
+      "Gmin_Hobler": 0.2158818992071614,
+      "Qmin_lpm_per_m_HM": 12.972555161357189,
+      "Qmin_lpm_per_m_Hobler": 12.991889621293565
+    },
+    {
+      "theta_deg": 105,
+      "Gmin_HM": 0.24748416534670065,
+      "Gmin_Hobler": 0.2478530188701789,
+      "Qmin_lpm_per_m_HM": 14.89373111414447,
+      "Qmin_lpm_per_m_Hobler": 14.915928918967635
+    }
+  ],
+  "min_wetting_note": "Correlations are for breakdown of an existing film (receding angle). Forming a film on a dry surface needs more flow (advancing angle). [EXP]",
+  "weir": [
+    {
+      "Q_lpm": 2.0,
+      "head_mm": 0.6920740132923562,
+      "head_over_capillary_length": 0.2550752828100244,
+      "level_tol_for_pm10pct_mm": 0.09227653510564748,
+      "tilt": [
+        {
+          "tilt_mm_per_m": 0.05,
+          "q_max_over_mean": 1.054505335140774,
+          "q_min_over_mean": 0.9461472106212664,
+          "wetted_fraction": 1.0
+        },
+        {
+          "tilt_mm_per_m": 0.1,
+          "q_max_over_mean": 1.1096284106488448,
+          "q_min_over_mean": 0.8929829673856456,
+          "wetted_fraction": 1.0
+        },
+        {
+          "tilt_mm_per_m": 0.2,
+          "q_max_over_mean": 1.221593397130436,
+          "q_min_over_mean": 0.7888713836756858,
+          "wetted_fraction": 1.0
+        },
+        {
+          "tilt_mm_per_m": 0.5,
+          "q_max_over_mean": 1.5689273674058082,
+          "q_min_over_mean": 0.4973654555101646,
+          "wetted_fraction": 1.0
+        },
+        {
+          "tilt_mm_per_m": 1.0,
+          "q_max_over_mean": 2.170316379607737,
+          "q_min_over_mean": 0.11128109147718865,
+          "wetted_fraction": 1.0
+        },
+        {
+          "tilt_mm_per_m": 2.0,
+          "q_max_over_mean": 3.2755968308035284,
+          "q_min_over_mean": 0.0,
+          "wetted_fraction": 0.7631184407796102
+        }
+      ]
+    },
+    {
+      "Q_lpm": 4.0,
+      "head_mm": 1.0985990167401398,
+      "head_over_capillary_length": 0.40490677226371874,
+      "level_tol_for_pm10pct_mm": 0.14647986889868533,
+      "tilt": [
+        {
+          "tilt_mm_per_m": 0.05,
+          "q_max_over_mean": 1.0342623797475312,
+          "q_min_over_mean": 0.9659965594178272,
+          "wetted_fraction": 1.0
+        },
+        {
+          "tilt_mm_per_m": 0.1,
+          "q_max_over_mean": 1.068774949452111,
+          "q_min_over_mean": 0.9322609951164436,
+          "wetted_fraction": 1.0
+        },
+        {
+          "tilt_mm_per_m": 0.2,
+          "q_max_over_mean": 1.1385164864998085,
+          "q_min_over_mean": 0.8656303075088131,
+          "wetted_fraction": 1.0
+        },
+        {
+          "tilt_mm_per_m": 0.5,
+          "q_max_over_mean": 1.3528799308889112,
+          "q_min_over_mean": 0.6731721271762656,
+          "wetted_fraction": 1.0
+        },
+        {
+          "tilt_mm_per_m": 1.0,
+          "q_max_over_mean": 1.723473603670689,
+          "q_min_over_mean": 0.38282926530750216,
+          "wetted_fraction": 1.0
+        },
+        {
+          "tilt_mm_per_m": 2.0,
+          "q_max_over_mean": 2.4824444495931086,
+          "q_min_over_mean": 0.0014620620037840534,
+          "wetted_fraction": 1.0
+        }
+      ]
+    }
+  ],
+  "thermal": {
+    "dL_alu_mm_dT20": 0.46,
+    "dL_PETG_mm_dT20": 1.36,
+    "tempered_glass_overall_bow_allow_mm_per_m": 3.0
+  },
+  "vnotch": [
+    {
+      "Q_lpm": 2.0,
+      "pitch_mm": 10,
+      "notches": 100,
+      "head_mm": 2.2463188508369774,
+      "flow_change_pct_per_mm_level": 111.29319415489485
+    },
+    {
+      "Q_lpm": 2.0,
+      "pitch_mm": 20,
+      "notches": 50,
+      "head_mm": 2.964035493797669,
+      "flow_change_pct_per_mm_level": 84.34446906021616
+    },
+    {
+      "Q_lpm": 4.0,
+      "pitch_mm": 10,
+      "notches": 100,
+      "head_mm": 2.964035493797669,
+      "flow_change_pct_per_mm_level": 84.34446906021616
+    },
+    {
+      "Q_lpm": 4.0,
+      "pitch_mm": 20,
+      "notches": 50,
+      "head_mm": 3.9110682818776654,
+      "flow_change_pct_per_mm_level": 63.92115452404668
+    }
+  ],
+  "orifice": [
+    {
+      "Q_lpm": 2.0,
+      "d_mm": 0.4,
+      "pitch_mm": 10,
+      "holes": 100,
+      "dP_kPa": 8.301875418426262,
+      "jet_v": 2.6525823848649224,
+      "Re_jet": 1188.5953427911586,
+      "hydrostatic_effect_pct_per_10mm_tilt": 0.5890578638587933
+    },
+    {
+      "Q_lpm": 2.0,
+      "d_mm": 0.5,
+      "pitch_mm": 10,
+      "holes": 100,
+      "dP_kPa": 3.400448171387399,
+      "jet_v": 1.6976527263135506,
+      "Re_jet": 950.876274232927,
+      "hydrostatic_effect_pct_per_10mm_tilt": 1.4381295504365064
+    },
+    {
+      "Q_lpm": 2.0,
+      "d_mm": 0.6,
+      "pitch_mm": 10,
+      "holes": 100,
+      "dP_kPa": 1.6398766258619784,
+      "jet_v": 1.1789255043844102,
+      "Re_jet": 792.3968951941059,
+      "hydrostatic_effect_pct_per_10mm_tilt": 2.98210543578514
+    },
+    {
+      "Q_lpm": 4.0,
+      "d_mm": 0.4,
+      "pitch_mm": 10,
+      "holes": 100,
+      "dP_kPa": 33.207501673705046,
+      "jet_v": 5.305164769729845,
+      "Re_jet": 2377.190685582317,
+      "hydrostatic_effect_pct_per_10mm_tilt": 0.14726446596469833
+    },
+    {
+      "Q_lpm": 4.0,
+      "d_mm": 0.5,
+      "pitch_mm": 10,
+      "holes": 100,
+      "dP_kPa": 13.601792685549595,
+      "jet_v": 3.395305452627101,
+      "Re_jet": 1901.752548465854,
+      "hydrostatic_effect_pct_per_10mm_tilt": 0.3595323876091266
+    },
+    {
+      "Q_lpm": 4.0,
+      "d_mm": 0.6,
+      "pitch_mm": 10,
+      "holes": 100,
+      "dP_kPa": 6.559506503447913,
+      "jet_v": 2.3578510087688205,
+      "Re_jet": 1584.7937903882118,
+      "hydrostatic_effect_pct_per_10mm_tilt": 0.745526358946285
+    }
+  ],
+  "manifold_distribution": [
+    {
+      "Q_lpm": 2.0,
+      "feed": "end",
+      "max": 1.0140876336166826,
+      "min": 0.9961403632553506,
+      "spread_pct": 1.7947270361332035
+    },
+    {
+      "Q_lpm": 2.0,
+      "feed": "center",
+      "max": 1.0003398090318134,
+      "min": 0.9994506098064172,
+      "spread_pct": 0.08891992253962089
+    },
+    {
+      "Q_lpm": 2.0,
+      "feed": "end + 10 mm tilt",
+      "max": 1.0210093438207866,
+      "min": 0.9898994358594833,
+      "spread_pct": 3.1109907961303307
+    },
+    {
+      "Q_lpm": 4.0,
+      "feed": "end",
+      "max": 1.0096251388854696,
+      "min": 0.9975593789089653,
+      "spread_pct": 1.2065759976504276
+    },
+    {
+      "Q_lpm": 4.0,
+      "feed": "center",
+      "max": 1.0005772462669826,
+      "min": 0.999605425235853,
+      "spread_pct": 0.09718210311295827
+    },
+    {
+      "Q_lpm": 4.0,
+      "feed": "end + 10 mm tilt",
+      "max": 1.0113665057482548,
+      "min": 0.9967533380720991,
+      "spread_pct": 1.4613167676155725
+    }
+  ],
+  "tolerance_montecarlo": [
+    {
+      "hole_dia_sigma_um": 5,
+      "per_hole_CV_pct": 2.0253827562266933,
+      "line_CV_after_slot_pct": 1.3423374686128942,
+      "line_range_after_slot_pct_p95": 8.415536328057183
+    },
+    {
+      "hole_dia_sigma_um": 10,
+      "per_hole_CV_pct": 3.959786993463845,
+      "line_CV_after_slot_pct": 2.0041446350724703,
+      "line_range_after_slot_pct_p95": 13.28414373909622
+    },
+    {
+      "hole_dia_sigma_um": 20,
+      "per_hole_CV_pct": 7.866477409779854,
+      "line_CV_after_slot_pct": 3.5827409756054056,
+      "line_range_after_slot_pct_p95": 23.758060018580757
+    }
+  ],
+  "slot_ripple_pct": {
+    "H=4mm": 16.200518431588627,
+    "H=6mm": 4.610822152621365,
+    "H=8mm": 1.3122839872612142,
+    "H=10mm": 0.37348854634159784
+  },
+  "capillary_slot": [
+    {
+      "slot_mm": 0.8,
+      "theta_glass": 20,
+      "theta_fin": 60,
+      "capillary_rise_mm": 13.247932980463485
+    },
+    {
+      "slot_mm": 0.8,
+      "theta_glass": 40,
+      "theta_fin": 75,
+      "capillary_rise_mm": 9.430709451487477
+    },
+    {
+      "slot_mm": 1.0,
+      "theta_glass": 20,
+      "theta_fin": 60,
+      "capillary_rise_mm": 10.598346384370789
+    },
+    {
+      "slot_mm": 1.0,
+      "theta_glass": 40,
+      "theta_fin": 75,
+      "capillary_rise_mm": 7.544567561189983
+    },
+    {
+      "slot_mm": 1.2,
+      "theta_glass": 20,
+      "theta_fin": 60,
+      "capillary_rise_mm": 8.831955320308992
+    },
+    {
+      "slot_mm": 1.2,
+      "theta_glass": 40,
+      "theta_fin": 75,
+      "capillary_rise_mm": 6.287139634324985
+    },
+    {
+      "slot_mm": 1.5,
+      "theta_glass": 20,
+      "theta_fin": 60,
+      "capillary_rise_mm": 7.0655642562471925
+    },
+    {
+      "slot_mm": 1.5,
+      "theta_glass": 40,
+      "theta_fin": 75,
+      "capillary_rise_mm": 5.029711707459988
+    },
+    {
+      "slot_mm": 2.0,
+      "theta_glass": 20,
+      "theta_fin": 60,
+      "capillary_rise_mm": 5.299173192185394
+    },
+    {
+      "slot_mm": 2.0,
+      "theta_glass": 40,
+      "theta_fin": 75,
+      "capillary_rise_mm": 3.7722837805949916
+    }
+  ],
+  "supply_line": [
+    {
+      "tube": "1/4\" OD (ID 4.3)",
+      "Q_lpm": 2.0,
+      "length_m": 4.0,
+      "dP_kPa": 75.29069334283211,
+      "V": 2.295366044231409,
+      "Re": 11056.700863173568
+    },
+    {
+      "tube": "1/4\" OD (ID 4.3)",
+      "Q_lpm": 4.0,
+      "length_m": 4.0,
+      "dP_kPa": 253.24669653581697,
+      "V": 4.590732088462818,
+      "Re": 22113.401726347136
+    },
+    {
+      "tube": "3/8\" OD (ID 6.4)",
+      "Q_lpm": 2.0,
+      "length_m": 4.0,
+      "dP_kPa": 11.385748438671255,
+      "V": 1.0361649940878603,
+      "Re": 7428.720892444741
+    },
+    {
+      "tube": "3/8\" OD (ID 6.4)",
+      "Q_lpm": 4.0,
+      "length_m": 4.0,
+      "dP_kPa": 38.29694018823694,
+      "V": 2.0723299881757207,
+      "Re": 14857.441784889483
+    }
+  ],
+  "rinse": [
+    {
+      "Q_lpm": 2.0,
+      "t_s": 20,
+      "volume_L": 0.6666666666666666,
+      "tap_fraction": 0.24784778866183688,
+      "TDS_rinse": 5,
+      "TDS_final_film": 116.5315048978266,
+      "residue_mg_m2": 3.495945146934798
+    },
+    {
+      "Q_lpm": 2.0,
+      "t_s": 20,
+      "volume_L": 0.6666666666666666,
+      "tap_fraction": 0.24784778866183688,
+      "TDS_rinse": 30,
+      "TDS_final_film": 141.5315048978266,
+      "residue_mg_m2": 4.245945146934798
+    },
+    {
+      "Q_lpm": 2.0,
+      "t_s": 30,
+      "volume_L": 1.0,
+      "tap_fraction": 0.07483940596879121,
+      "TDS_rinse": 5,
+      "TDS_final_film": 38.677732685956045,
+      "residue_mg_m2": 1.1603319805786814
+    },
+    {
+      "Q_lpm": 2.0,
+      "t_s": 30,
+      "volume_L": 1.0,
+      "tap_fraction": 0.07483940596879121,
+      "TDS_rinse": 30,
+      "TDS_final_film": 63.677732685956045,
+      "residue_mg_m2": 1.9103319805786814
+    },
+    {
+      "Q_lpm": 2.0,
+      "t_s": 45,
+      "volume_L": 1.5,
+      "tap_fraction": 0.012417902812196263,
+      "TDS_rinse": 5,
+      "TDS_final_film": 10.58805626548832,
+      "residue_mg_m2": 0.3176416879646496
+    },
+    {
+      "Q_lpm": 2.0,
+      "t_s": 45,
+      "volume_L": 1.5,
+      "tap_fraction": 0.012417902812196263,
+      "TDS_rinse": 30,
+      "TDS_final_film": 35.58805626548832,
+      "residue_mg_m2": 1.0676416879646495
+    },
+    {
+      "Q_lpm": 2.0,
+      "t_s": 60,
+      "volume_L": 2.0,
+      "tap_fraction": 0.002060469457994584,
+      "TDS_rinse": 5,
+      "TDS_final_film": 5.9272112560975625,
+      "residue_mg_m2": 0.17781633768292687
+    },
+    {
+      "Q_lpm": 2.0,
+      "t_s": 60,
+      "volume_L": 2.0,
+      "tap_fraction": 0.002060469457994584,
+      "TDS_rinse": 30,
+      "TDS_final_film": 30.927211256097564,
+      "residue_mg_m2": 0.9278163376829269
+    },
+    {
+      "Q_lpm": 2.0,
+      "t_s": 90,
+      "volume_L": 3.0,
+      "tap_fraction": 5.6728595482157226e-05,
+      "TDS_rinse": 5,
+      "TDS_final_film": 5.025527867966971,
+      "residue_mg_m2": 0.15076583603900912
+    },
+    {
+      "Q_lpm": 2.0,
+      "t_s": 90,
+      "volume_L": 3.0,
+      "tap_fraction": 5.6728595482157226e-05,
+      "TDS_rinse": 30,
+      "TDS_final_film": 30.02552786796697,
+      "residue_mg_m2": 0.9007658360390092
+    },
+    {
+      "Q_lpm": 4.0,
+      "t_s": 20,
+      "volume_L": 1.3333333333333333,
+      "tap_fraction": 0.06070488951517606,
+      "TDS_rinse": 5,
+      "TDS_final_film": 32.31720028182923,
+      "residue_mg_m2": 0.9695160084548768
+    },
+    {
+      "Q_lpm": 4.0,
+      "t_s": 20,
+      "volume_L": 1.3333333333333333,
+      "tap_fraction": 0.06070488951517606,
+      "TDS_rinse": 30,
+      "TDS_final_film": 57.31720028182923,
+      "residue_mg_m2": 1.719516008454877
+    },
+    {
+      "Q_lpm": 4.0,
+      "t_s": 30,
+      "volume_L": 2.0,
+      "tap_fraction": 0.009071691411845755,
+      "TDS_rinse": 5,
+      "TDS_final_film": 9.08226113533059,
+      "residue_mg_m2": 0.2724678340599177
+    },
+    {
+      "Q_lpm": 4.0,
+      "t_s": 30,
+      "volume_L": 2.0,
+      "tap_fraction": 0.009071691411845755,
+      "TDS_rinse": 30,
+      "TDS_final_film": 34.08226113533059,
+      "residue_mg_m2": 1.0224678340599176
+    },
+    {
+      "Q_lpm": 4.0,
+      "t_s": 45,
+      "volume_L": 3.0,
+      "tap_fraction": 0.0005240650070739239,
+      "TDS_rinse": 5,
+      "TDS_final_film": 5.235829253183265,
+      "residue_mg_m2": 0.15707487759549796
+    },
+    {
+      "Q_lpm": 4.0,
+      "t_s": 45,
+      "volume_L": 3.0,
+      "tap_fraction": 0.0005240650070739239,
+      "TDS_rinse": 30,
+      "TDS_final_film": 30.235829253183265,
+      "residue_mg_m2": 0.9070748775954979
+    },
+    {
+      "Q_lpm": 4.0,
+      "t_s": 60,
+      "volume_L": 4.0,
+      "tap_fraction": 3.0274853847074555e-05,
+      "TDS_rinse": 5,
+      "TDS_final_film": 5.013623684231184,
+      "residue_mg_m2": 0.15040871052693552
+    },
+    {
+      "Q_lpm": 4.0,
+      "t_s": 60,
+      "volume_L": 4.0,
+      "tap_fraction": 3.0274853847074555e-05,
+      "TDS_rinse": 30,
+      "TDS_final_film": 30.013623684231185,
+      "residue_mg_m2": 0.9004087105269356
+    },
+    {
+      "Q_lpm": 4.0,
+      "t_s": 90,
+      "volume_L": 6.0,
+      "tap_fraction": 1.0103592966851537e-07,
+      "TDS_rinse": 5,
+      "TDS_final_film": 5.000045466168351,
+      "residue_mg_m2": 0.15000136398505054
+    },
+    {
+      "Q_lpm": 4.0,
+      "t_s": 90,
+      "volume_L": 6.0,
+      "tap_fraction": 1.0103592966851537e-07,
+      "TDS_rinse": 30,
+      "TDS_final_film": 30.000045466168352,
+      "residue_mg_m2": 0.9000013639850506
+    }
+  ],
+  "residue_baseline_tap_mg_m2": 13.5,
+  "drain_film_um": {
+    "x=0.5m,t=30s": 38.9437075573419,
+    "x=0.5m,t=120s": 19.47185377867095,
+    "x=0.5m,t=600s": 8.708077739408878,
+    "x=1.5m,t=30s": 67.45248012442022,
+    "x=1.5m,t=120s": 33.72624006221011,
+    "x=1.5m,t=600s": 15.082833080915709
+  },
+  "DI_resin": {
+    "RO_permeate_TDS_assumed": 30,
+    "daily_volume_L": 4.0,
+    "resin_capacity_eq_per_L": 0.6,
+    "resin_life_days_per_L": 250.0
+  },
+  "structure": {
+    "mass_kg_per_m": 0.85,
+    "sag_mm_unsupported_1m": 0.7867697010869567,
+    "note": "Rail rests on the glass edge along its full length; sag is irrelevant. Value shown for a rail spanning 1 m between two clamps (variant B)."
+  }
+}
