@@ -30,9 +30,7 @@ def tube(length, y0=0.0, holes=None):
 
 def end_cap(inlet=True):
     """Moulded end cap (ASA / PA12), 5 mm plate + locating plug into tube chamber."""
-    outline = [(-14, -18), (-8, -18), (-8, 0), (0, 0), (0, -17.6), (1.6, -17.6), (2.9, -15),
-               (2.9, -13), (19.8, -13), (19.8, 4.2), (17, 4.2), (-13.2, 4.2), (-14, 3.4)]
-    plate = prism(outline, CAP_T, 0)
+    plate = prism(CAP_OUTLINE, CAP_T, 0)
     plug_poly = [(2.7, -10.3), (15.8, -10.3), (15.8, -1.3), (2.7, -1.3)]
     plug = prism(plug_poly, 8, CAP_T)
     hole_len = CAP_T + 8 + 1
@@ -68,7 +66,7 @@ if __name__ == "__main__":
     # --- individual production parts (1 m) ---
     export(body, "rail_body_990_6063T6", stl=False)
     export(cover, "rail_cover_990", stl=False)
-    export(man, "manifold_tube_10x0.8_316L_101holes", stl=False)
+    export(man, "manifold_tube_PVDF_10x1_198x0.35", stl=False)
     export(cap_in, "end_cap_inlet")
     export(end_cap(False), "end_cap_blind")
 
@@ -93,10 +91,10 @@ if __name__ == "__main__":
     export(prism(WEDGE, SEG, 0), "PRINT_wedge_gasket_TPU95A_247.5_x4", step=False)
     # 300 mm hydraulic test section (3 cover variants: slot 0.8 / 1.2 / 1.6 mm)
     export(prism(BODY, 300, 0), "TEST300_body", step=True)
-    for s in (0.8, 1.2, 1.6):
-        dx = s - 1.2
+    for s in (0.8, 1.0, 1.2):
+        dx = s - 1.0
         cv = [(x + dx if x < 3.0 else x, z) for x, z in COVER]
         export(prism(cv, 300, 0), f"TEST300_cover_slot_{s:.1f}mm", step=True)
-    hp300 = [y for y in hole_positions(300.0)]
-    export(tube(330, -20, hp300), "TEST300_manifold_tube_ref", stl=False)
+    export(tube(330, -20, hole_positions(300.0)), "TEST300_tube_A_p5_d0.35", stl=False)
+    export(tube(330, -20, hole_positions(300.0, 10.0)), "TEST300_tube_B_p10_d0.35_reference", stl=False)
     print("done")

@@ -17,15 +17,17 @@ BODY = [(-14, -18), (-11.3, -18), (-11.3, -16.8), (-12, -16.8), (-12, 2),
         (16, 2), (16, -10.5), (18, -10.5), (18, -9), (17.4, -9), (17.4, -7.5), (18, -7.5),
         (18, 3), (17, 4), (-13, 4), (-14, 3)]
 
-# Snap-on cover / slot fin (extruded aluminium or ASA). CCW polygon.
-COVER = [(1.2, -17), (1.5, -17), (2.7, -15), (2.7, -12.5), (19.6, -12.5), (19.6, -6),
+# Snap-on cover / slot fin (extruded aluminium or ASA). CCW polygon.  v0.3: slot 1.0 mm, fin rises to just
+# below the jets (capillary pool wall), knife tip protrudes 1 mm below the floor as a drip break.
+COVER = [(1.0, -13.5), (1.3, -13.5), (2.2, -12.5), (19.6, -12.5), (19.6, -6),
          (18.1, -6), (18.1, -7.7), (17.5, -8.0), (17.5, -8.8), (18.1, -8.8), (18.1, -10.5),
-         (1.2, -10.5)]
+         (2.2, -10.5), (2.2, -6.5), (1.0, -6.5)]
 
-# Manifold tube (AISI 316L, 10 x 0.8)
+# Manifold tube (v0.3: PVDF 10 x 1, no galvanic couple with the aluminium body)
 TUBE_C = (8.5, -5.5)
-TUBE_OD, TUBE_ID = 10.0, 8.4
-HOLE_D = 0.5            # laser drilled
+TUBE_OD, TUBE_ID = 10.0, 8.0
+HOLE_D = 0.35           # CNC micro-drilled or laser, +/-0.01
+HOLE_PITCH = 5.0
 HOLE_DIR = (-1.0, 0.0)  # jets toward glass, horizontal
 
 # Gaskets / blocks
@@ -34,18 +36,16 @@ SETTING_BLOCK = [(-T_GLASS, 0), (0, 0), (0, 2), (-T_GLASS, 2)]            # EPDM
 WEDGE = [(-12, -16.8), (-T_GLASS, -16.8), (-T_GLASS, -1.0), (-9.5, -0.2), (-12, -0.2)]  # EPDM wedge
 
 # Functional features (for drawings)
-SLOT = dict(x0=0.0, x1=1.2, z_top=-4.0, z_cover_top=-10.5, z_exit=-17.0)
+SLOT = dict(x0=0.0, x1=1.0, z_top=-4.0, z_fin_top=-6.5, z_exit=-13.5)
 JET_Z = -5.5
 
-# Hole pattern for a body length Lb (mm), positions along y from body start
-def hole_positions(Lb=990.0, pitch=10.0, edge_pitch=5.0, edge_n=3):
-    pos = [edge_pitch * (i + 1) for i in range(edge_n)]                 # 5,10,15
-    edge = pos[-1]
-    p = edge + pitch
-    while p <= Lb - edge - pitch + 1e-6:
-        pos.append(round(p, 3)); p += pitch
-    pos += [Lb - edge_pitch * (edge_n - i) for i in range(edge_n)]
-    return pos
+# Hole pattern for a body length Lb (mm): uniform pitch, first/last hole half a pitch from the end walls
+def hole_positions(Lb=990.0, pitch=HOLE_PITCH):
+    n = int(round(Lb / pitch))
+    return [round(pitch * (i + 0.5), 3) for i in range(n)]
+
+CAP_OUTLINE = [(-14, -18), (-8, -18), (-8, 0), (0, 0), (0, -14.1), (1.6, -14.1), (2.6, -13), (19.8, -13),
+               (19.8, 4.2), (17, 4.2), (-13.2, 4.2), (-14, 3.4)]
 
 def circle(c, r, n=72):
     return [(c[0] + r * math.cos(2 * math.pi * i / n), c[1] + r * math.sin(2 * math.pi * i / n)) for i in range(n)]
