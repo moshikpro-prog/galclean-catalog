@@ -252,6 +252,8 @@ figcaption a{color:var(--accent)}
   </ol>
   <p><b>מסלול המים.</b> מפל הלחץ בפיות (כ-3.5 kPa ב-2 ל'/דק'/מ') גדול פי 40 מהאנרגיה הקינטית בכניסה לצינור. לכן כל פייה מקבלת אותה ספיקה, ללא קשר לפילוס. כל סילון חוצה 3.5 מ"מ מעל קצה הסנפיר ופוגע בזכוכית. בסדק של 1.0 מ"מ, הנימיות מחזיקה "בריכה" בגובה 7.5–10 מ"מ, תלוי בזוויות המגע. המרחק מהסילונים לקו היציאה הוא 8 מ"מ, כך שהבריכה מגיעה כמעט עד לסילונים. בתוכה המים מתפזרים לרוחב, ויוצאים מתחת לשפת הסכין כקו רציף שכבר צמוד לזכוכית.</p>
   </div>
+  <figure><div class="paper"><img src="drawings/S6_explainer.svg" alt="גיליון הסבר: מבט מבחוץ עם חיתוך בקצה, חתך פנימי עם ארבעת שלבי זרימת המים, ומבט מתוך המקלחון" loading="lazy"></div>
+  <figcaption><span>גיליון הסבר: איך המסילה עובדת. מבט מבחוץ, חתך פנימי ומבט מתוך המקלחון</span><a href="drawings/S6_explainer.svg" target="_blank" rel="noopener">פתיחה בגודל מלא</a></figcaption></figure>
   <figure><div class="paper"><img src="drawings/S1_section_AA.svg" alt="גיליון 1: חתך רוחב ראשי של המסילה בקנה מידה 5:1 עם מקרא ומידות" loading="lazy"></div>
   <figcaption><span>גיליון 1/5: חתך A-A, קנה מידה 5:1</span><a href="drawings/S1_section_AA.svg" target="_blank" rel="noopener">פתיחה בגודל מלא</a></figcaption></figure>
   <figure><div class="paper"><img src="drawings/S2_details.svg" alt="גיליון 2: פרטי הסדק, הפייה, פריסת הפיות וסבולות" loading="lazy"></div>
@@ -663,13 +665,15 @@ const views = {
   overview: { p: [1.55, 1.45, 3.6], t: [0.45, 1.0, 0.0] },
   close: { p: [0.62, 2.07, 0.12], t: [0.44, 1.985, 0.0] },
   section: { p: [0.38, 1.997, 0.026], t: [0.5, 1.9935, 0.004] },
+  cutaway: { p: [0.405, 2.03, 0.085], t: [0.545, 1.982, -0.004] },
 };
 let cur = 'overview';
 function setView(v, instant) {
   cur = v; const V = views[v];
-  clipOn = v === 'section'; clip.constant = -0.5; mats.forEach(m => { m.clippingPlanes = clipList(); m.needsUpdate = true; });
+  clipOn = v === 'section' || v === 'cutaway'; clip.constant = -0.5; mats.forEach(m => { m.clippingPlanes = clipList(); m.needsUpdate = true; });
   filmM.clippingPlanes = clipList(); caps.visible = clipOn; setCapsX(0.5);
   jets.visible = v !== 'overview'; slotW.visible = v !== 'overview'; film.visible = v !== 'section';
+  if (v === 'cutaway') scene.background = new THREE.Color(0xffffff);
   camera.position.set(...V.p); controls.target.set(...V.t); controls.update();
   ['overview', 'close', 'section'].forEach(k => document.getElementById('b-' + k).setAttribute('aria-pressed', k === v));
   document.getElementById('vnote').textContent = v === 'section' ? 'חתך במרכז המסילה · כחול: מים מטוהרים' : 'גרירה לסיבוב · גלגלת להגדלה';
@@ -683,5 +687,6 @@ function resize() { const w = box.clientWidth, h = box.clientHeight; renderer.se
 new ResizeObserver(resize).observe(box); resize();
 const clock = new THREE.Clock();
 renderer.setAnimationLoop(() => { if (!reduce) filmU.uTime.value = clock.getElapsedTime(); controls.update(); renderer.render(scene, camera); });
+window.__project = pts => pts.map(p => { const q = new THREE.Vector3(...p).project(camera); return [(q.x + 1) / 2 * box.clientWidth, (1 - q.y) / 2 * box.clientHeight]; });
 window.__ready = true;
 </script>
