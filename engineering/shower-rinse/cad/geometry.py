@@ -17,11 +17,16 @@ BODY = [(-14, -18), (-11.3, -18), (-11.3, -16.8), (-12, -16.8), (-12, 2),
         (16, 2), (16, -10.5), (18, -10.5), (18, -9), (17.4, -9), (17.4, -7.5), (18, -7.5),
         (18, 3), (17, 4), (-13, 4), (-14, 3)]
 
-# Snap-on cover / slot fin (extruded aluminium or ASA). CCW polygon.  v0.3: slot 1.0 mm, fin rises to just
-# below the jets (capillary pool wall), knife tip protrudes 1 mm below the floor as a drip break.
-COVER = [(1.0, -13.5), (1.3, -13.5), (2.2, -12.5), (19.6, -12.5), (19.6, -6),
-         (18.1, -6), (18.1, -7.7), (17.5, -8.0), (17.5, -8.8), (18.1, -8.8), (18.1, -10.5),
-         (2.2, -10.5), (2.2, -6.5), (1.0, -6.5)]
+# Snap-on cover / slot fin (extruded aluminium or ASA). v0.3.1: the space between the fin and the tube is
+# filled by a cradle that hugs the tube from 200 deg to 270 deg. Its top slopes DOWN toward the glass
+# (contact point z=-7.21 -> fin top z=-7.6), so start/stop drips and splash drain into the slot and no
+# water can collect under the tube. Slot 1.0 mm, knife tip protrudes 1 mm below the floor as a drip break.
+_R = 5.05
+_ARC = [(round(8.5 + _R * math.cos(math.radians(a)), 3), round(-5.5 + _R * math.sin(math.radians(a)), 3))
+        for a in range(270, 199, -10)]
+COVER = ([(1.0, -13.5), (1.3, -13.5), (2.2, -12.5), (19.6, -12.5), (19.6, -6),
+          (18.1, -6), (18.1, -7.7), (17.5, -8.0), (17.5, -8.8), (18.1, -8.8), (18.1, -10.55)]
+         + _ARC + [(1.0, -7.6)])
 
 # Manifold tube (v0.3: PVDF 10 x 1, no galvanic couple with the aluminium body)
 TUBE_C = (8.5, -5.5)
@@ -36,7 +41,7 @@ SETTING_BLOCK = [(-T_GLASS, 0), (0, 0), (0, 2), (-T_GLASS, 2)]            # EPDM
 WEDGE = [(-12, -16.8), (-T_GLASS, -16.8), (-T_GLASS, -1.0), (-9.5, -0.2), (-12, -0.2)]  # EPDM wedge
 
 # Functional features (for drawings)
-SLOT = dict(x0=0.0, x1=1.0, z_top=-4.0, z_fin_top=-6.5, z_exit=-13.5)
+SLOT = dict(x0=0.0, x1=1.0, z_top=-4.0, z_fin_top=-7.6, z_exit=-13.5)
 JET_Z = -5.5
 
 # Hole pattern for a body length Lb (mm): uniform pitch, first/last hole half a pitch from the end walls
