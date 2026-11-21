@@ -28,10 +28,10 @@ def tube(length, y0=0.0, holes=None):
         t = t.cut(cutters)
     return t
 
-def end_cap(inlet=True):
+def end_cap(inlet=True, outline=None):
     """Moulded end cap (ASA / PA12), 5 mm plate + locating plug into tube chamber."""
-    plate = prism(CAP_OUTLINE, CAP_T, 0)
-    plug_poly = [(1.7, -6.8), (13.8, -6.8), (13.8, -1.3), (1.7, -1.3)]
+    plate = prism(outline or CAP_OUTLINE, CAP_T, 0)
+    plug_poly = [(1.7, -6.8), (11.8, -6.8), (11.8, -1.3), (1.7, -1.3)]
     plug = prism(plug_poly, 8, CAP_T)
     hole_len = CAP_T + 8 + 1
     bore = (cq.Workplane(cq.Plane(origin=(TUBE_C[0], -0.5, TUBE_C[1]), xDir=(1, 0, 0), normal=(0, 1, 0)))
@@ -69,6 +69,15 @@ if __name__ == "__main__":
     export(man, "manifold_tube_PE_10x8_198x0.35", stl=False)
     export(cap_in, "end_cap_inlet")
     export(end_cap(False), "end_cap_blind")
+
+    # --- P variant (pass-through rail) ---
+    export(prism(BODY_P, LB, CAP_T), "railP_body_990_6063T6", stl=False)
+    export(prism(COVER_P, LB, CAP_T), "railP_cover_990", stl=False)
+    pl = cq.Workplane(cq.Plane(origin=(PASS_C[0], -20, PASS_C[1]), xDir=(1, 0, 0), normal=(0, 1, 0))).circle(PASS_OD / 2).circle(PASS_ID / 2).extrude(LB + 40)
+    export(pl, "railP_pass_through_line_PE_8x6", stl=False)
+    export(end_cap(True, CAP_OUTLINE_P), "railP_end_cap", stl=True)
+    export(prism(BODY_P, 300, 0), "TEST300_railP_body", step=False)
+    export(prism(COVER_P, 300, 0), "TEST300_railP_cover", step=False)
 
     # --- assembly (1 m rail on 1000 x 2000 x 8 glass) ---
     asm = cq.Assembly(name="shower_rinse_rail_1000")

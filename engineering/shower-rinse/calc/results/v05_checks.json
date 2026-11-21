@@ -1,0 +1,124 @@
+{
+ "feeding": [
+  {
+   "case": "series 0.9+0.9 m, Q=4, d0.35, ID8",
+   "spread_pct": 14.46,
+   "KE_over_dP": 0.201,
+   "dP_hole_kPa": 4.37,
+   "area_ratio": 0.69
+  },
+  {
+   "case": "series 0.9+0.9 m, Q=4, d0.35, ID10",
+   "spread_pct": 4.78,
+   "KE_over_dP": 0.082,
+   "dP_hole_kPa": 4.37,
+   "area_ratio": 0.44
+  },
+  {
+   "case": "series 0.9+0.9 m, Q=4, d0.30, ID8",
+   "spread_pct": 8.12,
+   "KE_over_dP": 0.108,
+   "dP_hole_kPa": 8.1,
+   "area_ratio": 0.51
+  },
+  {
+   "case": "series 0.9+1.4+0.9 m, Q=6.5, d0.35, ID8",
+   "spread_pct": 66.1,
+   "KE_over_dP": 0.634,
+   "dP_hole_kPa": 3.65,
+   "area_ratio": 1.23
+  },
+  {
+   "case": "parallel: each rail 0.9 m, Q=2 each, d0.35, ID8",
+   "spread_pct": 1.48,
+   "KE_over_dP": 0.05,
+   "dP_hole_kPa": 4.37,
+   "area_ratio": 0.34
+  },
+  {
+   "case": "zone: one rail 1.0 m, Q=2, d0.35, ID8",
+   "spread_pct": 2.27,
+   "KE_over_dP": 0.062,
+   "dP_hole_kPa": 3.54,
+   "area_ratio": 0.38
+  }
+ ],
+ "zones_business": [
+  {
+   "layout": "דופן אחת 0.8",
+   "total_m": 0.8,
+   "max_zone_m": 0.73,
+   "zones": 2,
+   "time_s": 90,
+   "water_L": 2.2
+  },
+  {
+   "layout": "דופן אחת 1.2",
+   "total_m": 1.2,
+   "max_zone_m": 0.73,
+   "zones": 2,
+   "time_s": 90,
+   "water_L": 2.2
+  },
+  {
+   "layout": "פינה 0.9+0.9",
+   "total_m": 1.8,
+   "max_zone_m": 0.73,
+   "zones": 3,
+   "time_s": 135,
+   "water_L": 3.3
+  },
+  {
+   "layout": "פינה 1.2+0.9",
+   "total_m": 2.1,
+   "max_zone_m": 0.73,
+   "zones": 3,
+   "time_s": 135,
+   "water_L": 3.3
+  },
+  {
+   "layout": "U 0.9+1.4+0.9",
+   "total_m": 3.2,
+   "max_zone_m": 0.73,
+   "zones": 5,
+   "time_s": 225,
+   "water_L": 5.5
+  },
+  {
+   "layout": "גדול 1.0+2.0+1.0",
+   "total_m": 4.0,
+   "max_zone_m": 0.73,
+   "zones": 6,
+   "time_s": 270,
+   "water_L": 6.6
+  }
+ ],
+ "pass_through": {
+  "6x4": {
+   "dP_kPa": 106.2,
+   "V": 2.65
+  },
+  "8x6": {
+   "dP_kPa": 15.5,
+   "V": 1.18
+  },
+  "10x8": {
+   "dP_kPa": 3.9,
+   "V": 0.66
+  }
+ },
+ "retention": {
+  "weight_N_per_m": 0.74,
+  "jet_reaction_N_per_m": 0.058,
+  "jet_torque": "0 (jets are radial -> no twisting moment)",
+  "thermal_dL_mm_per_m_dT25": 3.8,
+  "note": "Hold by form (3-surface pocket, 0.05-0.1 mm clearance) + keyed end plug; do not rely on interference: PE/PP relax most clamp load in ~1000 h."
+ },
+ "rinse_aid": {
+  "qmin_clean_water_theta30": 3.88,
+  "qmin_sigma35_theta30": 2.52,
+  "qmin_sigma35_theta15": 1.11,
+  "reduction_factor_best": 3.5,
+  "dose_note": "Dishwasher rinse aids: 50-500 ppm in the rinse water. 10 s at 2 L/min x 100 ppm = 33 mg active per rinse."
+ }
+}
